@@ -1,0 +1,10 @@
+<p>title : </p>
+<%= @article.title %>
+<p>content : </p>
+<%= @article.content %>
+
+<hr>
+
+<%= link_to 'index 이동', '/' %>
+<%= link_to '수정', "/article/edit/#{@article.id}" %>
+<%= link_to '삭제', "/article/destroy/#{@article.id}" %>
