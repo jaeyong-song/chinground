@@ -13,7 +13,7 @@
         <td><%= article.content %></td>
         <td><%= link_to '보기', "/article/show/#{article.id}" %></td>
         <td><%= link_to '수정', "/article/edit/#{article.id}" %></td>
-        <td><%= link_to '삭제', "/article/destroy/#{article.id}" %></td>
+        <td><%= link_to '삭제', "/article/destroy/#{article.id}", data: { confirm: "삭제하시겠습니까?" } %></td>
     </tr>
 <% end %>
 </table>
