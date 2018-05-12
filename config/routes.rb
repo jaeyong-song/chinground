@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'chatroom/show'
+
   devise_for :users
   root 'welcome#index'
 
