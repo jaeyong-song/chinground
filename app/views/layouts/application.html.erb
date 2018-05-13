@@ -28,6 +28,7 @@
           <li class=<%= 'active' if request.original_fullpath == '/'  %>><%= link_to "홈", root_path %></li>
           <li class=<%= 'active' if request.original_fullpath == '/article' %>><%= link_to "게시글", "/article" %></li>
           <li class=<%= 'active' if request.original_fullpath == '/chatroom/show' %>><%= link_to "채팅방", "/chatroom/show" %></li>
+          <li class=<%= 'active' if request.original_fullpath == '/rating' %>><%= link_to "별점", "/rating" %></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <% if user_signed_in? %>

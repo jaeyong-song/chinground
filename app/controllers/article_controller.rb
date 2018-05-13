@@ -12,12 +12,15 @@ class ArticleController < ApplicationController
   end
   
   def create
-    Article.create({title: params[:title], content: params[:content], user: current_user})
+    Article.create({title: params[:title], content: params[:content], \
+    init_time: params[:init_time], fin_time: params[:fin_time], \
+    place: params[:place], user: current_user})
     #should include user input by. current_user method
     redirect_to '/article'
   end
   
   def show
+    @user = User.find(@article.user_id)
   end
   
   def destroy
@@ -33,7 +36,9 @@ class ArticleController < ApplicationController
   end
   
   def update
-    Article.update(params[:id], {title: params[:title], content: params[:content]})
+    Article.update(params[:id], {title: params[:title], content: params[:content], \
+    init_time: params[:init_time], fin_time: params[:fin_time], \
+    place: params[:place], user: current_user})
     redirect_to '/article'
   end
   

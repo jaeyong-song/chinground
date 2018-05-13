@@ -6,4 +6,6 @@ class User < ApplicationRecord
          :confirmable
          
   has_many :articles, dependent: :destroy
+  has_many :messages, dependent: :destroy
+  has_many :ratings, dependent: :destroy
 end

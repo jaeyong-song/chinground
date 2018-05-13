@@ -8,6 +8,10 @@ class ChatChannel < ApplicationCable::Channel
   end
   
   def speak(data)
-    Message.create! content: data["message"]
+    message = Message.new
+    message.user_id = 2
+    message.article_id = 1
+    message.content = data["message"]
+    message.save
   end
 end
