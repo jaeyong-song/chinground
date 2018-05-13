@@ -20,7 +20,16 @@ class ArticleController < ApplicationController
   end
   
   def show
+    # 작성한 user 에 대해서 알려줘야함
     @user = User.find(@article.user_id)
+    # 현재 이 article에 참여한 사람 목록 지정하여 보내줄 것!
+    @participants_all = ArticleUser.all
+    @participants = [] # 참여하는 사람 계정이름
+    @participants_all.each do |participant|
+      if @article.id == participant.article_id
+        @participants << User.find(participant.user_id).email
+      end
+    end
   end
   
   def destroy
@@ -40,6 +49,24 @@ class ArticleController < ApplicationController
     init_time: params[:init_time], fin_time: params[:fin_time], \
     place: params[:place], user: current_user})
     redirect_to '/article'
+  end
+  
+  # user들이 게시물에 참여할 수 있도록 하는 메소드
+  def participate
+    ArticleUser.create({ article_id: params[:article_id], user_id: params[:user_id] })
+    redirect_to "/article/show/#{params[:id]}"
+  end
+  
+  # user들이 게시물 참여 취소할 수 있도록 하는 메소드
+  def participate_cancel
+    @articleusers = ArticleUser.all
+    @articleusers.each do |articleuser|
+      if (articleuser.article_id == params[:article_id].to_i) && (articleuser.user_id == params[:user_id].to_i)
+        articleuser.destroy # 관계 삭제
+        flash[:success] = "참여가 취소되었습니다"
+      end
+    end
+    redirect_to "/article/show/#{params[:id]}"
   end
   
   private

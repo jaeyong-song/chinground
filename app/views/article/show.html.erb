@@ -10,9 +10,42 @@
 
 <p>종료시간 : <%= @article.fin_time %></p>
 
+<p>현재 참여한 사람: </p>
+<p><% @participants.each do |participant| %>
+<%= participant %> | 
+<% end %></p>
+
+
+<% participant = [] %>
+<% participant << current_user.email %>
+<!-- 참가 기능 추가 -->
+<% if (@user.id != current_user.id) && (@participants & participant != participant) %>
+<form action="/article/participate/<%= @article.id %>" method="post">
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+  <div class="form-group">
+    <input type="hidden" name="user_id" class="form-control" value="<%= current_user.id %>">
+    <input type="hidden" name="article_id" class="form-control" value="<%= @article.id %>">
+  </div>
+  <button type="submit" class="btn btn-primary">참가</button>
+</form>
+<% end %>
+
+<!-- 취소 기능 추가 -->
+<% if @participants & participant == participant %>
+<form action="/article/participate_cancel/<%= @article.id %>" method="post">
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+  <div class="form-group">
+    <input type="hidden" name="user_id" class="form-control" value="<%= current_user.id %>">
+    <input type="hidden" name="article_id" class="form-control" value="<%= @article.id %>">
+  </div>
+  <button type="submit" class="btn btn-primary">취소</button>
+</form>
+<% end %>
 
 <hr>
 
 <%= link_to 'index 이동', '/' %>
 <%= link_to '수정', "/article/edit/#{@article.id}" %>
 <%= link_to '삭제', "/article/destroy/#{@article.id}", data: { confirm: "삭제하시겠습니까?" } %>
+<%= link_to '완료(평가)', "/article/#{@article.id}/rating/new", data: { confirm: "모임이 끝나셨나요??\
+확인 버튼을 누르시면 모임이 끝나고 평가 페이지로 넘어갑니다" } %>
