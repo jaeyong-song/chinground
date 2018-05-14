@@ -18,7 +18,7 @@
 
 <% participant = [] %>
 <% participant << current_user.email %>
-<!-- 참가 기능 추가 -->
+<!-- 참가 기능 추가 / 참고로, 본인인 경우에는 게시물 작성 시 자동으로 참가 되도록 만들어야함.-->
 <% if (@user.id != current_user.id) && (@participants & participant != participant) %>
 <form action="/article/participate/<%= @article.id %>" method="post">
     <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
@@ -34,7 +34,11 @@
 <% if @participants & participant == participant %>
 <form action="/article/participate_cancel/<%= @article.id %>" method="post">
     <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-  <div class="form-group">
+  <div class="form-group">  
+  <!-- 만약 게시물 작성인 본인이 참가 취소 할 경우 권한 넘겨주고 참여 취소 -->
+  <% if @user.id == current_user.id %>
+    <input type="text" name="passto_id" class="form-control" placeholder="게시물 권한을 넘겨줄 계정을 입력해주세요">
+  <% end %>
     <input type="hidden" name="user_id" class="form-control" value="<%= current_user.id %>">
     <input type="hidden" name="article_id" class="form-control" value="<%= @article.id %>">
   </div>
