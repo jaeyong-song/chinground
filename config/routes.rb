@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   
   get '/article/edit/:id' => 'article#edit'
   post '/article/update/:id' => 'article#update'
+  get '/article/complete/:id' => 'article#complete'
   
   post '/article/participate/:id' => 'article#participate'
   post '/article/participate_cancel/:id' => 'article#participate_cancel'
@@ -25,8 +26,8 @@ Rails.application.routes.draw do
   get '/rating' => 'rating#index'
   # get '/rating/show/:id' => 'rating#show'
   
-  get '/article/:id/rating/new' => 'rating#new'
-  post '/article/:id/rating/create' => 'rating#create'
+  get '/rating/new/:id' => 'rating#new'
+  post '/rating/create/:id' => 'rating#create'
 
   # 되도록이면 삭제 불가능하도록 해야함...
   # user model에서 has_many: ratings, dependent: :destroy로 상속

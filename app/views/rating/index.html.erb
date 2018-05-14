@@ -1,19 +1,40 @@
-<h1><%= link_to '전체 별점 내역', '/' %></h1>
+<h1>나의 별점</h1>
+<p><%= @my_avg %></p>
 
-<%= link_to '글 추가', "/article/new" %>
-
+<h1>별점 평가 대기 목록</h1>
 <table>
     <tr>
         <th>제목</th>
-        <th>내용</th>
+        <th>장소</th>
+        <th>작성자</th>
+        <th colspan="2">관리</th>
     </tr>
-<% @articles.each do |article| %>
+<% @wait_list.each do |article| %>
     <tr>
         <td><%= article.title %></td>
-        <td><%= article.content %></td>
+        <td><%= article.place %></td>
+        <td><%= User.find(article.user_id).email %></td>
         <td><%= link_to '보기', "/article/show/#{article.id}" %></td>
-        <td><%= link_to '수정', "/article/edit/#{article.id}" %></td>
-        <td><%= link_to '삭제', "/article/destroy/#{article.id}", data: { confirm: "삭제하시겠습니까?" } %></td>
+        <td><%= link_to '평가', "/rating/new/#{article.id}", data: { confirm: "평가 하시겠습니까?" } %></td>
+    </tr>
+<% end %>
+</table>
+
+
+<h1>별점 평가 완료 목록</h1>
+<table>
+    <tr>
+        <th>제목</th>
+        <th>장소</th>
+        <th>작성자</th>
+        <th>보기</th>
+    </tr>
+<% @fin_list.each do |article| %>
+    <tr>
+        <td><%= article.title %></td>
+        <td><%= article.place %></td>
+        <td><%= User.find(article.user_id).email %></td>
+        <td><%= link_to '보기', "/article/show/#{article.id}" %></td>
     </tr>
 <% end %>
 </table>

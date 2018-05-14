@@ -1,2 +1,11 @@
-<h1>Rating#new</h1>
-<p>Find me in app/views/rating/new.html.erb</p>
+<h1>별점 평가 해주세요 ^^ (강요는 아니에요 ㅠ)</h1>
+<form action="/rating/create/<%= @article_id %>" method="post">
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+  <% @joined_users.each do |user| %>
+  <div class="form-group">
+    <label for="rating"><%= user.email %></label>
+    <input type="number" name="<%= user.id %>" class="form-control" id="rating" placeholder="0-5 사이 평점 입력" required>
+  </div>
+  <% end %>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>

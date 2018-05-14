@@ -1,6 +1,6 @@
 class ArticleController < ApplicationController
   before_action :authenticate_user!
-  before_action :find_params, only: [:show, :edit, :destroy, :participate_cancel]
+  before_action :find_params, only: [:show, :edit, :destroy, :complete, :participate_cancel]
   before_action :match_user, only: [:edit, :destroy]
   # 글 수정 및 삭제 시 자신의 글이 아니면 삭제 및 수정이 되지 않도록.
   # [OPTIMIZE] 현재 임시로 만들어 놓았고 문제 없나 확인해야함.
@@ -12,12 +12,13 @@ class ArticleController < ApplicationController
   end
   
   def create
-    article_tmp = Article.create({title: params[:title], content: params[:content], \
+    article_tmp = Article.create({ title: params[:title], content: params[:content], \
     init_time: params[:init_time], fin_time: params[:fin_time], \
-    place: params[:place], user: current_user})
+    place: params[:place], user: current_user, active: true })
     # 만약에 게시글을 생성하면 본인은 자동으로 추가되도록 만들 것
     ArticleUser.create({ article_id: article_tmp.id, user_id: current_user.id })
     #should include user input by. current_user.id method
+    flash[:success] = "게시물 생성이 완료되었습니다"
     redirect_to '/article'
   end
   
@@ -64,10 +65,18 @@ class ArticleController < ApplicationController
   end
   
   def update
-    Article.update(params[:id], {title: params[:title], content: params[:content], \
+    Article.update(params[:id], { title: params[:title], content: params[:content], \
     init_time: params[:init_time], fin_time: params[:fin_time], \
-    place: params[:place], user: current_user})
-    redirect_to '/article'
+    place: params[:place], user: current_user, active: true })
+    flash[:success] = "게시물 수정이 완료되었습니다"
+    redirect_to "/article/show/#{params[:id]}"
+  end
+  
+  def complete
+    @article.active = false
+    @article.save
+    flash[:success] = "모임이 완료되었습니다"
+    redirect_to "/article/show/#{params[:id]}"
   end
   
   # user들이 게시물에 참여할 수 있도록 하는 메소드
