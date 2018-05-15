@@ -46,9 +46,9 @@ class ArticleController < ApplicationController
         judge_int += 1
       end
     end
-    # 본인 외에 다른 사람이 참여하고 있으면
+    # 본인 외에 다른 사람이 참여하고 있고, 모임이 완료되지 않았다면
     if judge_int > 1
-      flash[:error] = "다른 사람이 참여하고 있을 때는 참여취소 후 게시물 권한 넘기기만 가능합니다"
+      flash[:error] = "다른 사람이 참여하고 있을 때는 참여취소 후 게시물 권한 넘기기만 가능합니다\n 이미 완료된 게시물은 삭제가 불가합니다"
       redirect_to "/article/show/#{params[:id]}"
     else
     # 그렇지 않다면
@@ -73,9 +73,23 @@ class ArticleController < ApplicationController
   end
   
   def complete
-    @article.active = false
-    @article.save
-    flash[:success] = "모임이 완료되었습니다"
+    # 만약에 참가자가 본인 밖에 없으면 모임 완료하지 말고 취소하도록 해야함
+    # 그래야 별점 조작 불가 등 조절 가능
+    @articleusers = ArticleUser.all
+    participants_num = 0
+    @articleusers.each do |articleuser|
+      if articleuser.article_id == params[:id].to_i
+        participants_num += 1
+      end
+    end
+    # 만약 참가자가 자기자신(1명)이면 완료 불가 문제 flash로 전달
+    if participants_num == 1
+      flash[:error] = "참가자가 본인 밖에 없으면 게시물 삭제를 해주세요"
+    else
+      @article.active = false
+      @article.save
+      flash[:success] = "모임이 완료되었습니다"
+    end
     redirect_to "/article/show/#{params[:id]}"
   end
   

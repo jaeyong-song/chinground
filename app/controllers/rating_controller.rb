@@ -1,4 +1,5 @@
 class RatingController < ApplicationController
+  before_action :authenticate_user!
   def index
       # 사용자의 평균 별점 보여주기
       @my_avg = avg_rating(current_user.id)
@@ -15,13 +16,14 @@ class RatingController < ApplicationController
   end
   def new
     # params[:id]에 별점 평가할 게시물 id가 넘어온 상태
-    @joined_users = find_participants(params[:id].to_i)
+    # 참여한 사람에서 자기 자신은 평가할 수 없도록 해야하기 때문에 주의!!
+    @joined_users = find_participants(params[:id].to_i) - [current_user.id]
     @article_id = params[:id]
   end
   def create
     # 현재 params[:id]에 게시물 id
     # hash로 user_id: rating 형태로 여러명의 평점 넘어온 상태
-    joined_users = find_participants(params[:id].to_i)
+    joined_users = find_participants(params[:id].to_i) - [current_user.id]
     # 몇번 create 메소드를 실행해야하는지 계산하여 실행
     joined_users.each do |id|
       Rating.create({ evaluator: current_user.id, user_id: id, \
