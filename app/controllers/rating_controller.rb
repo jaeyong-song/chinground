@@ -15,12 +15,13 @@ class RatingController < ApplicationController
   end
   def new
     # params[:id]에 별점 평가할 게시물 id가 넘어온 상태
-    @joined_users = find_participants(params[:id])
+    @joined_users = find_participants(params[:id].to_i)
+    @article_id = params[:id]
   end
   def create
     # 현재 params[:id]에 게시물 id
     # hash로 user_id: rating 형태로 여러명의 평점 넘어온 상태
-    joined_users = find_participants(params[:id])
+    joined_users = find_participants(params[:id].to_i)
     # 몇번 create 메소드를 실행해야하는지 계산하여 실행
     joined_users.each do |id|
       Rating.create({ evaluator: current_user.id, user_id: id, \
@@ -47,7 +48,7 @@ class RatingController < ApplicationController
     my_rated_article = [] # 내가 평가한 게시물(id) 저장
     @ratings.each do |rating|
       if rating.evaluator == user
-        my_rated_article << article_id
+        my_rated_article << rating.article_id
       end
     end
     # 한 게시물에 여러사람에게 평점을 주므로 uniq 메소드 이용

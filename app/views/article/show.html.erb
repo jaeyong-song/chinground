@@ -11,7 +11,7 @@
 <p>종료시간 : <%= @article.fin_time %></p>
 
 <!--만약 아직 완료된 게시물이 아닌 경우에만 보여줘야함.-->
-<% if @article.active = true %>
+<% if @article.active == true %>
   
   <p>현재 참여한 사람: </p>
   <p><% @participants.each do |participant| %>
@@ -50,8 +50,12 @@
   <% end %>
   
   <hr>
-  
+  <!-- 만약 모임이 아직 끝나지 않았다면 -->
   <%= link_to '모임완료', "/article/complete/#{@article.id}", data: { confirm: "모임이 끝나셨나요? 확인 버튼을 누르시면 모임이 끝나고 마이페이지에서 평가하시면 됩니다" } %>
+<% elsif %>
+  <hr>
+  <p>완료된 모임입니다</p>
+  <hr>
 <% end %>
 <%= link_to 'index 이동', '/article' %>
 <%= link_to '수정', "/article/edit/#{@article.id}" %>
