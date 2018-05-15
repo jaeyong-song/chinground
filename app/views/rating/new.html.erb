@@ -1,10 +1,10 @@
-<h1>별점 평가 해주세요 ^^ (강요는 아니에요 ㅠ)</h1>
+<h1>별점 평가 해주세요 ^^ (한번 평가하면 수정 불가합니다)</h1>
 <form action="/rating/create/<%= @article_id %>" method="post">
     <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-  <% @joined_users.each do |user| %>
+  <% @joined_users.each do |id| %>
   <div class="form-group">
-    <label for="rating"><%= user.email %></label>
-    <input type="number" name="<%= user.id %>" class="form-control" id="rating" placeholder="0-5 사이 평점 입력" required>
+    <label for="rating"><%= User.find(id).email %></label>
+    <input type="number" name="<%= id %>" class="form-control" id="rating" placeholder="0-5 사이 평점 입력" required>
   </div>
   <% end %>
   <button type="submit" class="btn btn-primary">Submit</button>
