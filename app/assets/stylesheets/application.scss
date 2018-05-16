@@ -11,3 +11,11 @@ $navbar-default-link-hover-bg: rgba(255, 255, 255, 0.2);
 @import "bootstrap/theme";
 
 body { padding-top: 60px; }
+
+.fa-star {
+    color: rgba(0, 0, 0, 0.2);
+}
+
+.checked {
+    color: rgb(37, 218, 157);
+}

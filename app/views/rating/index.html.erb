@@ -1,8 +1,17 @@
-<h1>나의 별점</h1>
-<p><%= @my_avg %></p>
+<h3>나의 별점 : <%= @my_avg %>
+<!--별표 아이콘으로 별점 표시-->
+<span class="fa fa-star <%= "checked" if @my_avg >= 1 %>"></span>
+<span class="fa fa-star <%= "checked" if @my_avg >= 2 %>"></span>
+<span class="fa fa-star <%= "checked" if @my_avg >= 3 %>"></span>
+<span class="fa fa-star <%= "checked" if @my_avg >= 4 %>"></span>
+<span class="fa fa-star <%= "checked" if @my_avg >= 5 %>"></span>
+</h3>
 
-<h1>별점 평가 대기 목록</h1>
-<table>
+<hr>
+
+<h3>별점 평가 대기 목록</h3>
+
+<table style="border: 1px solid slategray; width:100%;">
     <tr>
         <th>제목</th>
         <th>장소</th>
@@ -20,9 +29,11 @@
 <% end %>
 </table>
 
+<hr>
 
-<h1>별점 평가 완료 목록</h1>
-<table>
+<h3>별점 평가 완료 목록</h3>
+
+<table style="border: 1px solid slategray; width:100%;">
     <tr>
         <th>제목</th>
         <th>장소</th>

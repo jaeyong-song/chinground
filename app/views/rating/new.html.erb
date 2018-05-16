@@ -1,4 +1,4 @@
-<h1>별점 평가 해주세요 ^^ (한번 평가하면 수정 불가합니다)</h1>
+<h3>별점 평가 해주세요 ^^ (한번 평가하면 수정 불가합니다)</h3>
 <form action="/rating/create/<%= @article_id %>" method="post">
     <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
   <% @joined_users.each do |id| %>
