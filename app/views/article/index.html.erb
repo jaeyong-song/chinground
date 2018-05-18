@@ -1,24 +1,30 @@
-<h3>함께할 친구를 찾습니다</h3>
+<h3 style="display:inline-block;">함께할 친구를 찾습니다</h3>
 
-<%= link_to '글 추가', "/article/new" %>
+<button type="button" class="btn btn-success" href="/article/new" style="float:right; margin-top: 10px;">작성</button>
 
 <hr>
 
-<table style="border: 1px solid slategray; width:100%;">
+<table class="table table-hover">
+  <thead>
     <tr>
-        <th>제목</th>
-        <th>장소</th>
-        <th>작성자</th>
-        <th colspan="3">관리</th>
+      <th scope="col">번호</th></th>
+      <th scope="col">제목</th>
+      <th scope="col">장소</th>
+      <th scope="col">작성자</th>
+      <th scope="col" colspan="3">관리</th>
     </tr>
-<% @articles.each do |article| %>
+  </thead>
+  <tbody>
+    <% @articles.each do |article| %>
     <tr>
-        <td><%= article.title %></td>
-        <td><%= article.place %></td>
-        <td><%= User.find(article.user_id).email %></td>
-        <td><%= link_to '보기', "/article/show/#{article.id}" %></td>
-        <td><%= link_to '수정', "/article/edit/#{article.id}" %></td>
-        <td><%= link_to '삭제', "/article/destroy/#{article.id}", data: { confirm: "삭제하시겠습니까?" } %></td>
+      <th scope="row"><%= article.id %></th>
+      <td><%= article.title %></td>
+      <td><%= article.place %></td>
+      <td><%= article.user.email %></td>
+      <td><%= link_to '보기', "/article/show/#{article.id}" %></td>
+      <td><%= link_to '수정', "/article/edit/#{article.id}" %></td>
+      <td><%= link_to '삭제', "/article/destroy/#{article.id}", data: { confirm: "삭제하시겠습니까?" } %></td>
     </tr>
-<% end %>
+    <% end %>
+  </tbody>
 </table>

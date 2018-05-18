@@ -1,5 +1,6 @@
-<h3>나의 별점 : <%= @my_avg %>
+<h3 style="display:inline-block;">나의 별점 : <%= @my_avg %></h3>
 <!--별표 아이콘으로 별점 표시-->
+<h3 style="float:right;">
 <span class="fa fa-star <%= "checked" if @my_avg >= 1 %>"></span>
 <span class="fa fa-star <%= "checked" if @my_avg >= 2 %>"></span>
 <span class="fa fa-star <%= "checked" if @my_avg >= 3 %>"></span>
@@ -11,41 +12,52 @@
 
 <h3>별점 평가 대기 목록</h3>
 
-<table style="border: 1px solid slategray; width:100%;">
-    <tr>
-        <th>제목</th>
-        <th>장소</th>
-        <th>작성자</th>
-        <th colspan="2">관리</th>
-    </tr>
-<% @wait_list.each do |article_id| %>
-    <tr>
-        <td><%= Article.find(article_id).title %></td>
-        <td><%= Article.find(article_id).place %></td>
-        <td><%= User.find(Article.find(article_id).user_id).email %></td>
-        <td><%= link_to '보기', "/article/show/#{article_id}" %></td>
-        <td><%= link_to '평가', "/rating/new/#{article_id}", data: { confirm: "평가 하시겠습니까?" } %></td>
-    </tr>
-<% end %>
+<table class="table">
+    <thead>
+        <tr><th scope="col">번호</th>
+            <th scope="col">제목</th>
+            <th scope="col">장소</th>
+            <th scope="col">작성자</th>
+            <th scope="col" colspan="2">관리</th>
+        </tr>
+    </thead>
+    <tbody>
+    <% @wait_list.each do |article_id| %>
+        <tr>
+            <td scope="row"><%= article_id %></td>
+            <td><%= Article.find(article_id).title %></td>
+            <td><%= Article.find(article_id).place %></td>
+            <td><%= User.find(Article.find(article_id).user_id).email %></td>
+            <td><%= link_to '보기', "/article/show/#{article_id}" %></td>
+            <td><%= link_to '평가', "/rating/new/#{article_id}", data: { confirm: "평가 하시겠습니까?" } %></td>
+        </tr>
+    <% end %>
+    </tbody>
 </table>
 
 <hr>
 
 <h3>별점 평가 완료 목록</h3>
 
-<table style="border: 1px solid slategray; width:100%;">
-    <tr>
-        <th>제목</th>
-        <th>장소</th>
-        <th>작성자</th>
-        <th>보기</th>
-    </tr>
-<% @fin_list.each do |article_id| %>
-    <tr>
-        <td><%= Article.find(article_id).title %></td>
-        <td><%= Article.find(article_id).place %></td>
-        <td><%= User.find(Article.find(article_id).user_id).email %></td>
-        <td><%= link_to '보기', "/article/show/#{article_id}" %></td>
-    </tr>
-<% end %>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">번호</th>   
+            <th scope="col">제목</th>
+            <th scope="col">장소</th>
+            <th scope="col">작성자</th>
+            <th scope="col">보기</th>
+        </tr>
+    </thead>
+    <tbody>
+    <% @fin_list.each do |article_id| %>
+        <tr>
+            <td scope="row"><%= article_id %></td>
+            <td><%= Article.find(article_id).title %></td>
+            <td><%= Article.find(article_id).place %></td>
+            <td><%= User.find(Article.find(article_id).user_id).email %></td>
+            <td><%= link_to '보기', "/article/show/#{article_id}" %></td>
+        </tr>
+    <% end %>
+    </tbody>
 </table>
