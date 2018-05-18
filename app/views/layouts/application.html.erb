@@ -57,6 +57,7 @@
     <div id="section" style="width:80%; display:inline-block;">
       <%= yield %>
     </div>
+    <% if user_signed_in? %>
     <div id="aside" style="width:18%; border:1px solid slategray; float:right; text-align: center;">
       <h4>사용자: <%= current_user.email %></h4>
       <% my_avg = RatingController.avg_rating(current_user.id) %>
@@ -67,18 +68,27 @@
         <span class="fa fa-star <%= "checked" if my_avg >= 4 %>"></span>
         <span class="fa fa-star <%= "checked" if my_avg >= 5 %>"></span></p>
       <p>현재 참여 중</p>
-      <table>
+      <table class="table table-hover">
         <thead>
-          <th>제목</th>
-          <th>작성자</th>
-          <th>내용</th>
-          <th>관리</th>
+          <tr>
+            <th scope="col">제목</th>
+            <th scope="col">작성자</th>
+            <th scope="col">관리</th>
+          </tr>
         </thead>
         <tbody>
-          
+          <%# ????.each do |a| %>
+          <tr>
+            <td><%#= article.title %></td>
+            <td><%#= article.user.email %></td>
+            <td><%#= link_to '보기', "/article/show/#{a.id}" %></td>
+          </tr>
+          <%# end %>
+          <!-- ArticleUser 모델로 본인이 참여한 것 중 진행중인 것 show-->
         </tbody>
       </table>
     </div>
+    <% end %>
   </div>
   <div class="footer">
     
