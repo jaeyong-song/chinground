@@ -2,7 +2,7 @@ class RatingController < ApplicationController
   before_action :authenticate_user!
   def index
       # 사용자의 평균 별점 보여주기
-      @my_avg = avg_rating(current_user.id)
+      @my_avg = RatingController.avg_rating(current_user.id)
       # [OPTIZIZE] 나중에 m:n 구조 model helper로 간단하게 만들기
       # 내가 참여한 것 중 끝난 게시물에 대한 코드
       # 1. 평가를 미완료 한 것 모아주기 (wait_list)
@@ -33,7 +33,6 @@ class RatingController < ApplicationController
     redirect_to '/rating'
   end
   
-  private
   def find_participants(article_id)
     participants = []
     @articleusers = ArticleUser.all
@@ -70,7 +69,7 @@ class RatingController < ApplicationController
       return my_joins
   end
   # 사용자 평균 별점 계산 코드
-  def avg_rating(user)
+  def self.avg_rating(user)
       @ratings = Rating.all
       my_ratings = []
       @ratings.each do |rating|

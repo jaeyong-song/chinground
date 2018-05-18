@@ -54,13 +54,32 @@
   <div class="container">
     <!-- falsh message rendering-->
     <%= render partial: "shared/flash_messages", flash: flash %>
-    <%= yield %>
-  </div> <!-- /container -->
-  
-  <div class="aside">
-    
+    <div id="section" style="width:80%; display:inline-block;">
+      <%= yield %>
+    </div>
+    <div id="aside" style="width:18%; border:1px solid slategray; float:right; text-align: center;">
+      <h4>사용자: <%= current_user.email %></h4>
+      <% my_avg = RatingController.avg_rating(current_user.id) %>
+      <p>별점: <%= my_avg %>
+        <span class="fa fa-star <%= "checked" if my_avg >= 1 %>"></span>
+        <span class="fa fa-star <%= "checked" if my_avg >= 2 %>"></span>
+        <span class="fa fa-star <%= "checked" if my_avg >= 3 %>"></span>
+        <span class="fa fa-star <%= "checked" if my_avg >= 4 %>"></span>
+        <span class="fa fa-star <%= "checked" if my_avg >= 5 %>"></span></p>
+      <p>현재 참여 중</p>
+      <table>
+        <thead>
+          <th>제목</th>
+          <th>작성자</th>
+          <th>내용</th>
+          <th>관리</th>
+        </thead>
+        <tbody>
+          
+        </tbody>
+      </table>
+    </div>
   </div>
-  
   <div class="footer">
     
   </div>
