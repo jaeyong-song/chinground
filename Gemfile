@@ -14,10 +14,9 @@ gem 'devise'
 gem 'rolify' #role setting
 gem 'authority' #authenticate
 
-#bootstrap & form
-gem 'bootstrap-sass'
-gem 'simple_form'
+#jquery & bootstrap
 gem 'jquery-rails'
+gem 'bootstrap'
 
 #view sented email - in devel
 gem 'letter_opener', group: :development
