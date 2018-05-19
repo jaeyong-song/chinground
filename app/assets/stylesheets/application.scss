@@ -1,1 +1,120 @@
-@import 'bootstrap'
+@import 'bootstrap';
+
+/*율리우스 산스*/
+@import url('https://fonts.googleapis.com/css?family=Julius+Sans+One');
+/*나눔명조*/
+@import url('https://fonts.googleapis.com/css?family=Nanum+Myeongjo');
+/*스포카 한 산스*/
+@font-face{
+    font-family: 'SpoqaHanSans-Regular';
+    src: local('SpoqaHanSans-Regular'),
+        url('./font/Spoqa Han Sans Regular.woff') format('woff');
+}
+@font-face{
+    font-family: 'SpoqaHanSans-Light';
+    src: local('SpoqaHanSans-Light'),
+        url('./font/Spoqa Han Sans Light.woff') format('woff');
+}
+@font-face{
+    font-family: 'SpoqaHanSans-Thin';
+    src: local('SpoqaHanSans-Thin'),
+        url('./font/Spoqa Han Sans Thin.woff') format('woff');
+}
+@font-face{
+    font-family: 'SpoqaHanSans-Bold';
+    src: local('SpoqaHanSans-Bold'),
+        url('./font/Spoqa Han Sans Bold.woff') format('woff');
+}
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+    position: relative;
+    min-height: 100%;
+}
+body {
+/* Margin bottom by footer height */
+    margin-bottom: 60px;
+    font-family: 'Julius Sans One', sans-serif;
+}
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    /* Set the fixed height of the footer here */
+    height: 60px;
+    line-height: 60px; /* Vertically center the text there */
+    background-color: #f5f5f5;
+}
+/* Custom page CSS
+-------------------------------------------------- */
+/* Not required for template or sticky footer method. */
+
+body > #section {
+    padding: 60px 15px 0;
+    font-family: 'Nanum Myeongjo', serif;
+}
+
+body > .container {
+    font-family: 'SpoqaHanSans-Regular';
+}
+
+.footer > .container {
+    padding-right: 15px;
+    padding-left: 15px;
+    font-family: 'SpoqaHanSans-Regular';
+    text-align: center;
+}
+
+code {
+    font-size: 80%;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: rgba(96, 118, 79, 1);
+}
+
+a {
+    color: rgba(96, 118, 79, 1);
+}
+
+.nav-link:hover{
+    background-color: rgba(255,255,255,0.2);
+}
+
+.checked {
+    color: rgb(136, 176, 75);
+}
+
+#grid  div {
+    width : 250px;
+    height : auto;
+    border : 1px solid #bbb;
+    background-color : #eee;
+    margin : 5px;
+    padding : 3px;
+    text-align: center;
+    display: inline-block;
+}
+
+#grid p {
+    font-size: 14px;
+}
+
+// 사용자 정보
+.my_info div{
+    background-color: rgba(136, 176, 75, 0.6);
+    border-radius: 5px;
+    width:23%;
+    float:right;
+    text-align: center;
+    margin: 60px 10px 10px 10px;
+}
+.my_info h5,h6{
+    color : WHITE
+}
+.my_info p{
+    color : WHITE
+}
+.my_info:link { color: WHITE; text-decoration: none; }
+.my_info:visited { color: WHITE; text-decoration: none; }
+.my_info:hover { color: WHITE; text-decoration: none; }

@@ -1,3 +1,46 @@
 // Place all the styles related to the welcome controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+body{
+    background:url('swing_background.jpg');
+    background-size:     cover;
+    background-repeat:   no-repeat;
+    background-position: center center; 
+}
+
+.square-box{
+    position: relative;
+    left: 40%;
+    width: 50%;
+    min-width: 500px;
+    overflow: hidden;
+    background-color: rgba( 0, 0, 0, 0.2 );
+}
+.square-box:before{
+    content: "";
+    display: block;
+    padding-top: 100%;
+}
+.square-content{
+    position:  absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    color: white;
+}
+.square-content div {
+    display: table;
+    padding-top: 30%;
+    width: 100%;
+    height: 100%;
+}
+.main-area {
+    display: table-row;
+    vertical-align: middle;
+    text-align: center;
+    color: white
+}
+.square-content h1{
+    font-size: 2em;
+}
