@@ -14,109 +14,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <title>친그라운드</title>
-
-    <style>
-        /*율리우스 산스*/
-        @import url('https://fonts.googleapis.com/css?family=Julius+Sans+One');
-        /*나눔명조*/
-        @import url('https://fonts.googleapis.com/css?family=Nanum+Myeongjo');
-        /*스포카 한 산스*/
-        @font-face{
-        font-family: 'SpoqaHanSans-Regular';
-        src: local('SpoqaHanSans-Regular'),
-            url('./font/Spoqa Han Sans Regular.woff') format('woff');
-        }
-        @font-face{
-        font-family: 'SpoqaHanSans-Light';
-        src: local('SpoqaHanSans-Light'),
-            url('./font/Spoqa Han Sans Light.woff') format('woff');
-        }
-        @font-face{
-        font-family: 'SpoqaHanSans-Thin';
-        src: local('SpoqaHanSans-Thin'),
-            url('./font/Spoqa Han Sans Thin.woff') format('woff');
-        }
-        @font-face{
-        font-family: 'SpoqaHanSans-Bold';
-        src: local('SpoqaHanSans-Bold'),
-            url('./font/Spoqa Han Sans Bold.woff') format('woff');
-        }
-        /* Sticky footer styles
-        -------------------------------------------------- */
-        html {
-        position: relative;
-        min-height: 100%;
-        }
-        body {
-        /* Margin bottom by footer height */
-        margin-bottom: 60px;
-        font-family: 'Julius Sans One', sans-serif;
-        }
-        .footer {
-        position: absolute;
-        bottom: 0;
-        width: 100%;
-        /* Set the fixed height of the footer here */
-        height: 60px;
-        line-height: 60px; /* Vertically center the text there */
-        background-color: #f5f5f5;
-        }
-        /* Custom page CSS
-        -------------------------------------------------- */
-        /* Not required for template or sticky footer method. */
-
-        body > #section {
-        padding: 60px 15px 0;
-        font-family: 'Nanum Myeongjo', serif;
-        }
-        
-        body > .container {
-        font-family: 'SpoqaHanSans-Regular';
-        }
-
-        .footer > .container {
-        padding-right: 15px;
-        padding-left: 15px;
-        font-family: 'SpoqaHanSans-Regular';
-        text-align: center;
-        }
-
-        code {
-        font-size: 80%;
-        }
-
-        h1, h2, h3, h4, h5, h6 {
-            color: rgba(96, 118, 79, 1);
-        }
-
-        a {
-            color: rgba(96, 118, 79, 1);
-        }
-
-        .nav-link:hover{
-            background-color: rgba(255,255,255,0.2);
-        }
-        
-        .checked {
-        color: rgba(136, 176, 75);
-        }
-        
-        #grid  div {
-        width : 250px;
-        height : auto;
-        border : 1px solid #bbb;
-        background-color : #eee;
-        margin : 5px;
-        padding : 3px;
-        text-align: center;
-        display: inline-block;
-        }
-        
-        #grid p {
-            font-size: 14px;
-        }
-        
-    </style>
   </head>
   <body>
     <header>
@@ -177,36 +74,38 @@
     </main>
     
     <% if user_signed_in? %>
-    <div class="container" style="width:23%; border:1px solid slategray; float:right; text-align: center; margin: 60px 10px 10px 10px;">
-    <h5>사용자: <%= current_user.email %></h5>
-      <h6><% my_avg = RatingController.avg_rating(current_user.id) %></h6>
-      <p>별점: <%= my_avg %>
-        <span class="fa fa-star <%= "checked" if my_avg >= 1 %>"></span>
-        <span class="fa fa-star <%= "checked" if my_avg >= 2 %>"></span>
-        <span class="fa fa-star <%= "checked" if my_avg >= 3 %>"></span>
-        <span class="fa fa-star <%= "checked" if my_avg >= 4 %>"></span>
-        <span class="fa fa-star <%= "checked" if my_avg >= 5 %>"></span></p>
-      <p>현재 참여 중</p>
-      <table class="table table-hover">
-        <thead>
-          <tr>
-            <th scope="col">제목</th>
-            <th scope="col">작성자</th>
-            <th scope="col">관리</th>
-          </tr>
-        </thead>
-        <tbody>
-          <%# ????.each do |a| %>
-          <tr>
-            <td><%#= article.title %></td>
-            <td><%#= article.user.email %></td>
-            <td><%#= link_to '보기', "/article/show/#{a.id}" %></td>
-          </tr>
-          <%# end %>
-          <!-- ArticleUser 모델로 본인이 참여한 것 중 진행중인 것 show-->
-        </tbody>
-      </table>
-    </div>
+    <a class="my_info" href="/mypage" style="text-decoration:none;">
+        <div class="container">
+        <h5>사용자: <%= current_user.email %></h5>
+          <h6><% my_avg = RatingController.avg_rating(current_user.id) %></h6>
+          <p>별점: <%= my_avg %>
+            <span class="fa fa-star <%= "checked" if my_avg >= 1 %>"></span>
+            <span class="fa fa-star <%= "checked" if my_avg >= 2 %>"></span>
+            <span class="fa fa-star <%= "checked" if my_avg >= 3 %>"></span>
+            <span class="fa fa-star <%= "checked" if my_avg >= 4 %>"></span>
+            <span class="fa fa-star <%= "checked" if my_avg >= 5 %>"></span></p>
+          <p>현재 참여 중</p>
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th scope="col">제목</th>
+                <th scope="col">작성자</th>
+                <th scope="col">관리</th>
+              </tr>
+            </thead>
+            <tbody>
+              <%# ????.each do |a| %>
+              <tr>
+                <td><%#= article.title %></td>
+                <td><%#= article.user.email %></td>
+                <td><%#= link_to '보기', "/article/show/#{a.id}" %></td>
+              </tr>
+              <%# end %>
+              <!-- ArticleUser 모델로 본인이 참여한 것 중 진행중인 것 show-->
+            </tbody>
+          </table>
+        </div>
+    </a>
     <% end %>
 
     <!--footer-->
