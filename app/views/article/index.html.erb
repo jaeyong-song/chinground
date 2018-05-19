@@ -4,27 +4,55 @@
 
 <hr>
 
-<table class="table table-hover">
-  <thead>
-    <tr>
-      <th scope="col">번호</th></th>
-      <th scope="col">제목</th>
-      <th scope="col">장소</th>
-      <th scope="col">작성자</th>
-      <th scope="col" colspan="3">관리</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @articles.each do |article| %>
-    <tr>
-      <th scope="row"><%= article.id %></th>
-      <td><%= article.title %></td>
-      <td><%= article.place %></td>
-      <td><%= article.user.email %></td>
-      <td><%= link_to '보기', "/article/show/#{article.id}" %></td>
-      <td><%= link_to '수정', "/article/edit/#{article.id}" %></td>
-      <td><%= link_to '삭제', "/article/destroy/#{article.id}", data: { confirm: "삭제하시겠습니까?" } %></td>
-    </tr>
-    <% end %>
-  </tbody>
-</table>
+<!--<table class="table table-hover">-->
+<!--  <thead>-->
+<!--    <tr>-->
+<!--      <th scope="col">번호</th></th>-->
+<!--      <th scope="col">제목</th>-->
+<!--      <th scope="col">장소</th>-->
+<!--      <th scope="col">작성자</th>-->
+<!--      <th scope="col" colspan="3">관리</th>-->
+<!--    </tr>-->
+<!--  </thead>-->
+<!--  <tbody>-->
+<!--    <% @articles.each do |article| %>-->
+<!--    <tr>-->
+<!--      <th scope="row"><%= article.id %></th>-->
+<!--      <td><%= article.title %></td>-->
+<!--      <td><%= article.place %></td>-->
+<!--      <td><%= article.user.email %></td>-->
+<!--      <td><%= link_to '보기', "/article/show/#{article.id}" %></td>-->
+<!--      <td><%= link_to '수정', "/article/edit/#{article.id}" %></td>-->
+<!--      <td><%= link_to '삭제', "/article/destroy/#{article.id}", data: { confirm: "삭제하시겠습니까?" } %></td>-->
+<!--    </tr>-->
+<!--    <% end %>-->
+<!--  </tbody>-->
+<!--</table>-->
+
+<div id="grid">
+<% @articles.reverse.each do |article| %>
+  <div>
+    <h5><%= link_to "#{article.title}", "/article/show/#{article.id}" %></h5>
+    <h6><%= article.place %></h6>
+    <p>주최자: <%= article.user.email %><br>
+        평점: <%= RatingController.avg_rating(article.user.id)%></p>
+    <p>시작: <%= article.init_time %><br>
+        종료: <%= article.fin_time %></p>
+  </div>
+<% end %>
+</div>
+
+<script>
+$ (function () {
+    // #container 부하의 div가 그릿 레이아웃으로 정렬됩니다
+    $ ( "#grid"). vgrid ({
+        easing : "easeOutQuint"
+        time : 500
+        delay : 20
+        fadeIn : {
+            time : 300
+            delay : 50
+        }
+    });
+});
+</script>

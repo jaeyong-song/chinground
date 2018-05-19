@@ -101,6 +101,21 @@
         color: rgba(136, 176, 75);
         }
         
+        #grid  div {
+        width : 250px;
+        height : auto;
+        border : 1px solid #bbb;
+        background-color : #eee;
+        margin : 5px;
+        padding : 3px;
+        text-align: center;
+        display: inline-block;
+        }
+        
+        #grid p {
+            font-size: 14px;
+        }
+        
     </style>
   </head>
   <body>
@@ -156,7 +171,7 @@
     </header>
 
     <!-- Begin page content -->
-    <main role="main" id="section" style="width:75%; display:inline-block; padding:20px 20px 20px 20px; margin-top:60px;">
+    <main role="main" id="section" style="width:75%; height:800px; display:inline-block; padding:20px 20px 20px 20px; margin-top:60px;">
         <%= render partial: "shared/flash_messages", flash: flash %>
         <%= yield %>
     </main>
