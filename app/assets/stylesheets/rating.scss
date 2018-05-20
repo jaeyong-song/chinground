@@ -1,3 +1,108 @@
 // Place all the styles related to the rating controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+// .rating-area{
+//     margin:5px;
+//     padding:5px;
+//     background-color: rgba(136, 176, 75, 0.5);
+//     border-radius: 5px;
+//     background-size: 100%, 100%;
+// }
+
+.title{ text-align:center; margin-bottom:30px; }
+
+
+table { text-align:center; }
+.table-title { text-align : center; margin: 0px 20px; }
+
+.before{ width:20%; }
+.after { width:25%; }
+
+.rating-area .table.table-hover {
+    border: 2px dashed rgba(136, 176, 75, 0.5) !important;
+    border-collapse: separate;
+    border-radius:15px;
+    border-spacing:0;
+}
+.rating-area .table.table-hover th:first-child {
+    border-radius: 15px 0 0 0;
+}
+.rating-area .table.table-hover th:last-child {
+    border-radius: 0 15px 0 0;
+}
+
+table tr td a {
+    display:block;
+    height:100%;
+    width:100%;
+}
+table tr td a:link { color:black; text-decoration:none; }
+table tr td a:hover { color:black; text-decoration:none; }
+table tr td a:visited { color:black; text-decoration:none; }
+
+#valuate:hover { color:white; }
+
+.button {
+    display: inline-block;
+    position: relative;
+    width: 100%;
+    border: none;
+    text-decoration: none;
+    outline: none;
+    color: #000;
+    background: transparent;
+}
+
+.button span {
+    -webkit-transition: 0.6s;
+    -moz-transition: 0.6s;
+    -o-transition: 0.6s;
+    transition: 0.6s;
+    -webkit-transition-delay: 0.2s;
+    -moz-transition-delay: 0.2s;
+    -o-transition-delay: 0.2s;
+    transition-delay: 0.2s;
+}
+
+.button:before,
+.button:after {
+    content: 'GoGo!';
+    color:WHITE;
+    position: absolute;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    opacity: 0;
+    -webkit-transition: .4s,opacity .6s;
+    -moz-transition: .4s,opacity .6s;
+    -o-transition: .4s,opacity .6s;
+    transition: .4s,opacity .6s;
+    -webkit-transform: translate(50%,0);
+    -moz-transform: translate(50%,0);
+    -ms-transform: translate(50%,0);
+    -o-transform: translate(50%,0);
+    transform: translate(50%,0);
+}
+
+.button:hover span {
+    opacity: 0;
+    -webkit-transform: scale(0.1);
+    -moz-transform: scale(0.1);
+    -ms-transform: scale(0.1);
+    -o-transform: scale(0.1);
+    transform: scale(0.1);
+}
+
+.button:hover:before {
+    opacity: 1;
+    -webkit-transform: translate(0,0);
+    -moz-transform: translate(0,0);
+    -ms-transform: translate(0,0);
+    -o-transform: translate(0,0);
+    transform: translate(0,0);
+    -webkit-transition-delay: .4s;
+    -moz-transition-delay: .4s;
+    -o-transition-delay: .4s;
+    transition-delay: .4s;
+}
