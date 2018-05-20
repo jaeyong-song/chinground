@@ -9,4 +9,5 @@ class User < ApplicationRecord
   has_many :messages, dependent: :destroy
   has_many :ratings, dependent: :destroy
   has_many :article_users, dependent: :destroy
+  has_many :comments
 end

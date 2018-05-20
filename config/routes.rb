@@ -2,6 +2,10 @@ Rails.application.routes.draw do
   devise_for :users
   root 'welcome#index'
   
+  # 마이 페이지 관련
+  get '/mypage' => 'welcome#mypage'
+  get '/myground' => 'welcome#myground'
+  
   # =========================================
 
   # for 'article management'
@@ -19,8 +23,11 @@ Rails.application.routes.draw do
   
   post '/article/participate/:id' => 'article#participate'
   post '/article/participate_cancel/:id' => 'article#participate_cancel'
-  
   # =========================================
+  
+  # 댓글 관련
+  post '/article/:id/comment/create' => 'comment#create'
+  get '/article/:id/comment/:id/destroy' => 'comment#destroy'
   
   # for 'rating management'
   get '/rating' => 'rating#index'

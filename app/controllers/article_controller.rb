@@ -30,7 +30,7 @@ class ArticleController < ApplicationController
     @participants = [] # 참여하는 사람 계정이름
     @participants_all.each do |participant|
       if @article.id == participant.article_id
-        @participants << User.find(participant.user_id).email
+        @participants << User.find(participant.user_id)
       end
     end
   end

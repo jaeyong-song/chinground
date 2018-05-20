@@ -7,9 +7,9 @@ class RatingController < ApplicationController
       # 내가 참여한 것 중 끝난 게시물에 대한 코드
       # 1. 평가를 미완료 한 것 모아주기 (wait_list)
       # 2. 평가를 완료한 것 모아주기 (fin_list)
-      my_joins = find_my_joins(current_user.id)
+      my_joins = RatingController.find_my_joined(current_user.id)
       # 내가 참여한 모임(id) 중 끝난 모임이 my_joins에 들어있음
-      @fin_list = find_my_ratings(current_user.id)
+      @fin_list = RatingController.find_my_ratings(current_user.id)
       # 내가 평가 완료한 모임이 fin_list에 들어있음
       @wait_list = my_joins - @fin_list
       # 내가 평가 완료하지 못한 모임이 wait_list에...
@@ -44,7 +44,7 @@ class RatingController < ApplicationController
     return participants
   end
   # 내가 평가한 게시물 찾기
-  def find_my_ratings(user)
+  def self.find_my_ratings(user)
     @ratings = Rating.all
     my_rated_article = [] # 내가 평가한 게시물(id) 저장
     @ratings.each do |rating|
@@ -55,8 +55,8 @@ class RatingController < ApplicationController
     # 한 게시물에 여러사람에게 평점을 주므로 uniq 메소드 이용
     return my_rated_article.uniq
   end
-  # 내가 참여한 게시물 찾기
-  def find_my_joins(user)
+  # 내가 참여했던 게시물 찾기
+  def self.find_my_joined(user)
       my_joins = []
       @articleusers = ArticleUser.all
       @articleusers.each do |articleuser|

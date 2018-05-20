@@ -1,8 +1,8 @@
-<p>작성자 : <%= @user.email %></p>
+<h3>제목 : <%= @article.title %></h3>
 
-<p>제목 : <%= @article.title %></p>
+<h3>장소 : <%= @article.place %></h3>
 
-<p>장소 : <%= @article.place %></p>
+<h4>작성자 : <%= @user.email %></h4>
 
 <p>내용 : <%= @article.content %></p>
 
@@ -15,14 +15,12 @@
   
   <p>현재 참여한 사람: </p>
   <p><% @participants.each do |participant| %>
-  <%= participant %> | 
+  <%= participant.email %>, 별점: <%= RatingController.avg_rating(participant.id) %> | 
   <% end %></p>
   
-  
-  <% participant = [] %>
-  <% participant << current_user.email %>
+
   <!-- 참가 기능 추가 / 참고로, 본인인 경우에는 게시물 작성 시 자동으로 참가 되도록 만들어야함.-->
-  <% if (@user.id != current_user.id) && (@participants & participant != participant) %>
+  <% if (@user.id != current_user.id) && (@participants & [current_user] != [current_user]) %>
   <form action="/article/participate/<%= @article.id %>" method="post">
       <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
     <div class="form-group">
@@ -34,7 +32,7 @@
   <% end %>
   
   <!-- 취소 기능 추가 -->
-  <% if @participants & participant == participant %>
+  <% if @participants & [current_user] == [current_user] %>
   <form action="/article/participate_cancel/<%= @article.id %>" method="post">
       <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
     <div class="form-group">  
@@ -60,3 +58,20 @@
 <%= link_to 'index 이동', '/article' %>
 <%= link_to '수정', "/article/edit/#{@article.id}" %>
 <%= link_to '삭제', "/article/destroy/#{@article.id}", data: { confirm: "삭제하시겠습니까?" } %>
+
+<hr>
+<!--여기서부터 댓글 기능 추가-->
+<%=form_with scope: :comment, url: "/article/#{params[:id]}/comment/create", method: :post do |form| %>
+<%= form.label :content, "댓글" %>
+<%= form.text_field :content %>
+<%= form.submit "입력" %>
+<% end %>
+<hr>
+<% @article.comments.each do |c| %>
+  <!--본인이 작성자가 아니라면 삭제 불가능해야함-->
+  <% if c.user_id == current_user.id %>
+    <p><%= User.find(c.user_id).email %>: <%= c.content %> | <%= link_to "삭제", "/article/#{params[:id]}/comment/#{c.id}/destroy" %></p>
+  <% else %>
+    <p><%= User.find(c.user_id).email %>: <%= c.content %></p>
+  <% end %>
+<% end %>

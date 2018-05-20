@@ -1,0 +1,54 @@
+<h3>현재 진행 중인 그라운드</h3>
+
+<table class="table">
+    <thead>
+        <tr><th scope="col">번호</th>
+            <th scope="col">제목</th>
+            <th scope="col">장소</th>
+            <th scope="col">작성자</th>
+            <th scope="col">진행중?</th>
+            <th scope="col">관리</th>
+        </tr>
+    </thead>
+    <tbody>
+    <% @my_all.each do |article_id| %>
+        <% if Article.find(article_id).active == true %>
+        <tr>
+            <td scope="row"><%= article_id %></td>
+            <td><%= Article.find(article_id).title %></td>
+            <td><%= Article.find(article_id).place %></td>
+            <td><%= User.find(Article.find(article_id).user_id).email %></td>
+            <td><%= Article.find(article_id).active %></td>
+            <td><%= link_to '보기', "/article/show/#{article_id}" %></td>
+        </tr>
+        <% end %>
+    <% end %>
+    </tbody>
+</table>
+
+
+<h3>내가 참여한 전체 그라운드</h3>
+
+<table class="table">
+    <thead>
+        <tr><th scope="col">번호</th>
+            <th scope="col">제목</th>
+            <th scope="col">장소</th>
+            <th scope="col">작성자</th>
+            <th scope="col">진행중?</th>
+            <th scope="col">관리</th>
+        </tr>
+    </thead>
+    <tbody>
+    <% @my_all.each do |article_id| %>
+        <tr>
+            <td scope="row"><%= article_id %></td>
+            <td><%= Article.find(article_id).title %></td>
+            <td><%= Article.find(article_id).place %></td>
+            <td><%= User.find(Article.find(article_id).user_id).email %></td>
+            <td><%= Article.find(article_id).active %></td>
+            <td><%= link_to '보기', "/article/show/#{article_id}" %></td>
+        </tr>
+    <% end %>
+    </tbody>
+</table>

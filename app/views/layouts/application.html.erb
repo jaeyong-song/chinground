@@ -33,7 +33,7 @@
             </li>
             <li class="nav-item">
             <!--나의 모임에서 종합 관리-->
-            <a class="nav-link" href="#" style="color:white;">나의 모임</a>
+            <a class="nav-link" href="/myground" style="color:white;">나의 모임</a>
             </li>
             <li class="nav-item <%= 'active' if request.original_fullpath == '/chatroom/show' %>">
             <a class="nav-link" href="/chatroom/show" style="color:white;">채팅</a>
@@ -84,24 +84,28 @@
             <span class="fa fa-star <%= "checked" if my_avg >= 3 %>"></span>
             <span class="fa fa-star <%= "checked" if my_avg >= 4 %>"></span>
             <span class="fa fa-star <%= "checked" if my_avg >= 5 %>"></span></p>
-          <p>현재 참여 중</p>
-          <table class="table table-hover">
+          <p>현재 참여 중인 그라운드 목록</p>
+          <table class="table table-hover" style="font-size: 12px;">
             <thead>
               <tr>
+                <th scope="col">번호</th>
                 <th scope="col">제목</th>
-                <th scope="col">작성자</th>
+                <th scope="col">장소</th>
                 <th scope="col">관리</th>
               </tr>
             </thead>
             <tbody>
-              <%# ????.each do |a| %>
-              <tr>
-                <td><%#= article.title %></td>
-                <td><%#= article.user.email %></td>
-                <td><%#= link_to '보기', "/article/show/#{a.id}" %></td>
-              </tr>
-              <%# end %>
-              <!-- ArticleUser 모델로 본인이 참여한 것 중 진행중인 것 show-->
+            <% WelcomeController.find_my_all(current_user.id).reverse.each do |article_id| %>
+                <% temp = Article.find(article_id) %>
+                <% if temp.active == true %>
+                <tr>
+                    <td scope="row"><%= article_id %></td>
+                    <td><%= link_to "#{temp.title}", "/article/show/#{article_id}", style: "color:white;" %></td>
+                    <td><%= temp.place %></td>
+                    <td><%= link_to '보기', "/article/show/#{article_id}", style: "color:white;" %></td>
+                </tr>
+                <% end %>
+            <% end %>
             </tbody>
           </table>
         </div>

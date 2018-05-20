@@ -8,22 +8,22 @@
 @font-face{
     font-family: 'SpoqaHanSans-Regular';
     src: local('SpoqaHanSans-Regular'),
-        url('./font/Spoqa Han Sans Regular.woff') format('woff');
+        url('/fonts/Spoqa Han Sans Regular.woff') format('woff');
 }
 @font-face{
     font-family: 'SpoqaHanSans-Light';
     src: local('SpoqaHanSans-Light'),
-        url('./font/Spoqa Han Sans Light.woff') format('woff');
+        url('/fonts/Spoqa Han Sans Light.woff') format('woff');
 }
 @font-face{
     font-family: 'SpoqaHanSans-Thin';
     src: local('SpoqaHanSans-Thin'),
-        url('./font/Spoqa Han Sans Thin.woff') format('woff');
+        url('/fonts/Spoqa Han Sans Thin.woff') format('woff');
 }
 @font-face{
     font-family: 'SpoqaHanSans-Bold';
     src: local('SpoqaHanSans-Bold'),
-        url('./font/Spoqa Han Sans Bold.woff') format('woff');
+        url('/fonts/Spoqa Han Sans Bold.woff') format('woff');
 }
 /* Sticky footer styles
 -------------------------------------------------- */
@@ -75,6 +75,7 @@ h1, h2, h3, h4, h5, h6 {
 
 a {
     color: rgba(96, 118, 79, 1);
+    text-decoration: none;
 }
 
 .nav-link:hover{
@@ -98,6 +99,10 @@ a {
 
 #grid p {
     font-size: 14px;
+}
+
+#grid h5, #grid h6 {
+    color: rgba(96, 118, 79, 1);
 }
 
 // 사용자 정보
