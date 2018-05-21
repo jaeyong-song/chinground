@@ -128,6 +128,12 @@ class ArticleController < ApplicationController
     redirect_to "/article/show/#{params[:id]}"
   end
   
+  # 검색엔진 컨트롤러
+  def search
+    @search = Article.ransack(params[:q])
+    @articles = @search.result(distinct: true)
+  end
+  
   private
   def find_params
     @article = Article.find(params[:id])

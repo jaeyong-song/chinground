@@ -23,6 +23,10 @@ Rails.application.routes.draw do
   
   post '/article/participate/:id' => 'article#participate'
   post '/article/participate_cancel/:id' => 'article#participate_cancel'
+  
+  #검색
+  post '/article/search' => 'article#search'
+  get '/article/search' => 'article#search'
   # =========================================
   
   # 댓글 관련

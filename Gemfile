@@ -18,6 +18,9 @@ gem 'authority' #authenticate
 gem 'jquery-rails'
 gem 'bootstrap'
 
+#serch engine
+gem 'ransack'
+
 #view sented email - in devel
 gem 'letter_opener', group: :development
 

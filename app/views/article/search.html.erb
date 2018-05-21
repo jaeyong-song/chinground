@@ -1,0 +1,32 @@
+<%= search_form_for @search, url: '/article/search', class: "form-group" do |f| %>
+    <%= f.text_field :title_cont, class: "form-control", value: "#{params[:title]!=nil ? params[:title] : ''}", placeholder: "제목..." %>
+    <%= f.text_field :content_cont, class: "form-control", placeholder: "내용..." %>
+    <%= f.text_field :place_cont, class: "form-control", placeholder: "장소..." %>
+    <%= f.submit "검색", class: "btn" %>
+<% end %>
+<p>검색 결과를 보시려면 '검색'을 클릭해주세요^^</p>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">번호</th></th>
+      <th scope="col">제목</th>
+      <th scope="col">장소</th>
+      <th scope="col">작성자</th>
+      <th scope="col" colspan="3">관리</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @articles.each do |article| %>
+    <tr>
+      <th scope="row"><%= article.id %></th>
+      <td><%= article.title %></td>
+      <td><%= article.place %></td>
+      <td><%= article.user.email %></td>
+      <td><%= link_to '보기', "/article/show/#{article.id}" %></td>
+      <td><%= link_to '수정', "/article/edit/#{article.id}" %></td>
+      <td><%= link_to '삭제', "/article/destroy/#{article.id}", data: { confirm: "삭제하시겠습니까?" } %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
