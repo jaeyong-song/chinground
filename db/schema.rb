@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180520010435) do
+ActiveRecord::Schema.define(version: 20180521090438) do
 
   create_table "article_users", force: :cascade do |t|
     t.integer "article_id"
@@ -50,6 +50,15 @@ ActiveRecord::Schema.define(version: 20180520010435) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "new_notifications", force: :cascade do |t|
+    t.string "content"
+    t.integer "user_id"
+    t.string "link"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_new_notifications_on_user_id"
+  end
+
   create_table "ratings", force: :cascade do |t|
     t.integer "user_id"
     t.integer "evaluator"
@@ -57,6 +66,17 @@ ActiveRecord::Schema.define(version: 20180520010435) do
     t.float "rate"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "read_marks", force: :cascade do |t|
+    t.string "readable_type", null: false
+    t.integer "readable_id"
+    t.string "reader_type", null: false
+    t.integer "reader_id"
+    t.datetime "timestamp"
+    t.index ["readable_type", "readable_id"], name: "index_read_marks_on_readable_type_and_readable_id"
+    t.index ["reader_id", "reader_type", "readable_type", "readable_id"], name: "read_marks_reader_readable_index", unique: true
+    t.index ["reader_type", "reader_id"], name: "index_read_marks_on_reader_type_and_reader_id"
   end
 
   create_table "users", force: :cascade do |t|

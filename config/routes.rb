@@ -57,5 +57,11 @@ Rails.application.routes.draw do
 
   # for 'chatroom management'
   get '/chatroom/show'
+  
+  # notification routing
+  #알림 : 전체 삭제
+  get '/new_notifications/read_all' => 'new_notifications#read_all'
+  #알림
+  resources :new_notifications
 
 end

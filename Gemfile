@@ -21,6 +21,9 @@ gem 'bootstrap'
 #serch engine
 gem 'ransack'
 
+#notice helper
+gem 'unread'
+
 #view sented email - in devel
 gem 'letter_opener', group: :development
 

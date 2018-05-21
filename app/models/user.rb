@@ -10,4 +10,6 @@ class User < ApplicationRecord
   has_many :ratings, dependent: :destroy
   has_many :article_users, dependent: :destroy
   has_many :comments
+  acts_as_reader
+  has_many :new_notifications
 end
