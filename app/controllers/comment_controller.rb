@@ -5,10 +5,18 @@ class CommentController < ApplicationController
     comment.user_id = current_user.id
     comment.article_id = params[:id]
     comment.save
-    # 일단 구현해 본 뒤 모든 참가자한테 알림이 뜨도록 수정할 수 있을 듯....
-    @new_notification = NewNotification.create! user: User.find(Article.find(params[:id]).user_id),
-                        content: "#{current_user.email}님이 댓글을 달았습니다.",
-                        link: "/article/show/#{params[:id]}"
+    # 사용자들에게 댓글 달렸음 알려주는 알림 코드
+    users_list = ArticleUser.where(article_id: params[:id].to_i) #user_list에 현재 article에 해당되는 사람 목록 저장
+    users = [] # 실제 참가한 사람 id만 저장할 배열
+    users_list.each do |articleuser|
+     users << articleuser.user_id
+    end
+    # 알림 내역 저장을 참여한 모든 사람을 대상으로 진행해야함
+    users.each do |user|
+      @new_notification = NewNotification.create! user: User.find(user),
+                          content: "#{params[:id]}번 글에 #{current_user.email}님이 댓글을 달았습니다.",
+                          link: "/article/show/#{params[:id]}"
+    end
     redirect_to "/article/show/#{params[:id]}"
   end
 

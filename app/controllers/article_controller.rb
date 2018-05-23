@@ -95,8 +95,25 @@ class ArticleController < ApplicationController
   
   # user들이 게시물에 참여할 수 있도록 하는 메소드
   def participate
+    # 참여자들에게 새로운 참여자가 있음을 알려주는 메소드
+    users_list = ArticleUser.where(article_id: params[:id].to_i) #user_list에 현재 article에 해당되는 사람 목록 저장
+    # 참고로 아직은 신규 참가자에게 알림이 뜨지 않았음 -> 신규 참가자에게는 ~~에 새로 참가했습니다...로 따로 알림
+    users = [] # 실제 참가한 사람 id만 저장할 배열
+    users_list.each do |articleuser|
+    users << articleuser.user_id
+    end
+    # 알림 내역 저장을 참여한 모든 사람을 대상으로 진행해야함
+    users.each do |user|
+      @new_notification = NewNotification.create! user: User.find(user),
+                          content: "#{params[:id]}번 글에 #{current_user.email}님이 참가했습니다",
+                          link: "/article/show/#{params[:id]}"
+    end
+    
     ArticleUser.create({ article_id: params[:article_id], user_id: params[:user_id] })
     flash[:success] = "참여가 완료되었습니다"
+    @new_notification = NewNotification.create! user: current_user,
+                          content: "#{params[:id]}번 글에 참가했습니다",
+                          link: "/article/show/#{params[:id]}"
     redirect_to "/article/show/#{params[:id]}"
   end
   
@@ -124,6 +141,25 @@ class ArticleController < ApplicationController
         articleuser.destroy # 관계 삭제
         flash[:success] = "참여가 취소되었습니다"
       end
+    end
+    # 참가 취소자가 있음을 알려주는 코드
+    users_list = ArticleUser.where(article_id: params[:id].to_i) #user_list에 현재 article에 해당되는 사람 목록 저장
+    # 현재 참여 취소 작업을 완료된 상태이므로 방금 취소한 사람 제외 전부 보내짐
+    users = [] # 실제 참가한 사람 id만 저장할 배열
+    users_list.each do |articleuser|
+    users << articleuser.user_id
+    end
+    # 알림 내역 저장을 참여한 모든 사람을 대상으로 진행해야함
+    users.each do |user|
+      @new_notification = NewNotification.create! user: User.find(user),
+                          content: "#{params[:id]}번 글에 #{current_user.email}님이 참가 취소했습니다",
+                          link: "/article/show/#{params[:id]}"
+    end
+    # 자신에게도 글에서 참여 취소가 되었음을 알림
+    users.each do |user|
+      @new_notification = NewNotification.create! user: current_user,
+                          content: "#{params[:id]}번 글에서 참가 취소되었습니다.",
+                          link: "/article/show/#{params[:id]}"
     end
     redirect_to "/article/show/#{params[:id]}"
   end
