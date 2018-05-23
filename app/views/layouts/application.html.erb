@@ -105,19 +105,17 @@
                 <th scope="col">번호</th>
                 <th scope="col">제목</th>
                 <th scope="col">장소</th>
-                <th scope="col">관리</th>
               </tr>
             </thead>
             <tbody>
             <% WelcomeController.find_my_all(current_user.id).reverse.each do |article_id| %>
                 <% temp = Article.find(article_id) %>
                 <% if temp.active == true %>
-                <tr>
+                <a href="/article/show/#{article_id}"><tr>
                     <td scope="row"><%= article_id %></td>
-                    <td><%= link_to "#{temp.title}", "/article/show/#{article_id}", style: "color:white; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;" %></td>
-                    <td><%= temp.place %></td>
-                    <td><%= link_to '보기', "/article/show/#{article_id}", style: "color:white;" %></td>
-                </tr>
+                    <td style="color:white; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;"><%= link_to "#{temp.title}", "/article/show/#{article_id}", style: 'color:white; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;' %></td>
+                    <td style="color:white; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;"><%= temp.place %></td>
+                </tr></a>
                 <% end %>
             <% end %>
             </tbody>
