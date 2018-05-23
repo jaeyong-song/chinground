@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180521090438) do
+ActiveRecord::Schema.define(version: 20180523061117) do
 
   create_table "article_users", force: :cascade do |t|
     t.integer "article_id"
@@ -32,6 +32,23 @@ ActiveRecord::Schema.define(version: 20180521090438) do
     t.index ["user_id"], name: "index_articles_on_user_id"
   end
 
+  create_table "chatroom_users", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "room_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["room_id"], name: "index_chatroom_users_on_room_id"
+    t.index ["user_id"], name: "index_chatroom_users_on_user_id"
+  end
+
+  create_table "chatrooms", force: :cascade do |t|
+    t.string "name"
+    t.integer "article_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["article_id"], name: "index_chatrooms_on_article_id"
+  end
+
   create_table "comments", force: :cascade do |t|
     t.integer "user_id"
     t.integer "article_id"
@@ -45,9 +62,11 @@ ActiveRecord::Schema.define(version: 20180521090438) do
   create_table "messages", force: :cascade do |t|
     t.text "content"
     t.integer "user_id"
-    t.integer "article_id"
+    t.integer "room_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["room_id"], name: "index_messages_on_room_id"
+    t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
   create_table "new_notifications", force: :cascade do |t|
