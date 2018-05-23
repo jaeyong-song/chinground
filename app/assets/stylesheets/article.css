@@ -1,0 +1,43 @@
+.title{
+    float: left;
+    font-size: 2em !important;
+}
+.btn{
+    float:right;
+    margin: 20px 0;
+    background-color: rgb(136, 176, 75);
+    color: WHITE;
+}
+
+#grid{
+    clear: right;
+    /*background-color: red;*/
+    text-align: center;
+    overflow-y: scroll;
+}
+::-webkit-scrollbar {
+    display: none;
+}
+
+.article-area{
+    width: 90% !important;
+    background-color: white !important;
+    border:2px dashed rgba(136, 176, 75, 0.6) !important;
+    border-radius: 15px !important;
+    padding:0 !important;
+    margin-bottom: 10px !important;
+}
+.article-title{
+    margin:0;
+    font-size: 1.5em;
+    background-color: rgba(136, 176, 75, 0.6);
+    border-radius: 15px 15px 0 0;
+}
+.article-place{
+    font-size: 1.2em !important;
+}
+.article-date{
+    font-style: italic !important;
+    float: right;
+    margin-right: 20px;
+}

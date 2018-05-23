@@ -70,11 +70,19 @@ code {
 }
 
 h1, h2, h3, h4, h5, h6 {
-    color: rgba(96, 118, 79, 1);
+    color: rgb(96, 118, 79);
 }
 
-a {
-    color: rgba(96, 118, 79, 1);
+a:link {
+    color: rgb(96, 118, 79);
+    text-decoration: none;
+}
+a:hover {
+    color: rgb(96, 118, 79);
+    text-decoration: none;
+}
+a:visited {
+    color: rgb(96, 118, 79);
     text-decoration: none;
 }
 

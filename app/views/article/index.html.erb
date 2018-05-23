@@ -1,43 +1,20 @@
-<h3 style="display:inline-block;">함께할 친구를 찾습니다</h3>
+<%= stylesheet_link_tag "article" %>
+<h1 class="title">함께할 친구를 찾습니다</h1>
 
-<button type="button" class="btn" style="float:right; margin-top: 10px; background-color: rgba(136, 176, 75);"><a href="/article/new" style="color:white;">작성</a></button>
-
-<hr>
-
-<!--<table class="table table-hover">-->
-<!--  <thead>-->
-<!--    <tr>-->
-<!--      <th scope="col">번호</th></th>-->
-<!--      <th scope="col">제목</th>-->
-<!--      <th scope="col">장소</th>-->
-<!--      <th scope="col">작성자</th>-->
-<!--      <th scope="col" colspan="3">관리</th>-->
-<!--    </tr>-->
-<!--  </thead>-->
-<!--  <tbody>-->
-<!--    <% @articles.each do |article| %>-->
-<!--    <tr>-->
-<!--      <th scope="row"><%= article.id %></th>-->
-<!--      <td><%= article.title %></td>-->
-<!--      <td><%= article.place %></td>-->
-<!--      <td><%= article.user.email %></td>-->
-<!--      <td><%= link_to '보기', "/article/show/#{article.id}" %></td>-->
-<!--      <td><%= link_to '수정', "/article/edit/#{article.id}" %></td>-->
-<!--      <td><%= link_to '삭제', "/article/destroy/#{article.id}", data: { confirm: "삭제하시겠습니까?" } %></td>-->
-<!--    </tr>-->
-<!--    <% end %>-->
-<!--  </tbody>-->
-<!--</table>-->
+<%= button_to '작성', "/article/new", class:"btn", :method => :get %>
+<!--<button type="button" class="btn" style="float:right; margin-top: 10px; background-color: rgba(136, 176, 75);"><a href="/article/new" style="color:white;">작성</a></button>-->
 
 <div id="grid">
 <% @articles.reverse.each do |article| %>
-  <div>
-    <h5><%= link_to "#{article.title}", "/article/show/#{article.id}" %></h5>
-    <h6><%= article.place %></h6>
-    <p>주최자: <%= article.user.email %><br>
-        평점: <%= RatingController.avg_rating(article.user.id)%></p>
-    <p>시작: <%= article.init_time %><br>
-        종료: <%= article.fin_time %></p>
+  <div class="article-area">
+        <%= link_to ("/article/show/#{article.id}") do %>
+            <h2 class="article-title"><%= article.title %></h2>
+            <p class="article-place"><%= article.place %></p>
+            <p class="article-user">주최자: <%= article.user.email %></p>
+            <p class="article-rating">평점: <%= RatingController.avg_rating(article.user.id)%></p>
+            <p class="article-date">종료: <%= article.fin_time %></p>
+            <p class="article-date">시작: <%= article.init_time %></p>
+        <% end %>
   </div>
 <% end %>
 </div>
