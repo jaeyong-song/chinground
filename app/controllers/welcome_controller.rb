@@ -35,6 +35,6 @@ class WelcomeController < ApplicationController
             my_all << articleuser.article_id
         end
       end
-      return my_all
+      return my_all.uniq
   end
 end

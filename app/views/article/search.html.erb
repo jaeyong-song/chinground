@@ -1,5 +1,5 @@
 <%= search_form_for @search, url: '/article/search', class: "form-group" do |f| %>
-    <%= f.text_field :title_cont, class: "form-control", value: "#{params[:title]!=nil ? params[:title] : ''}", placeholder: "제목..." %>
+    <%= f.text_field :title_cont, class: "form-control", value: "#{params[:title]!=nil ? params[:title] : ''}", placeholder: "제목...", autofocus: true %>
     <%= f.text_field :content_cont, class: "form-control", placeholder: "내용..." %>
     <%= f.text_field :place_cont, class: "form-control", placeholder: "장소..." %>
     <%= f.submit "검색", class: "btn" %>

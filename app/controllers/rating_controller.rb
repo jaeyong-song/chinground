@@ -66,7 +66,7 @@ class RatingController < ApplicationController
             end
           end
       end
-      return my_joins
+      return my_joins.uniq
   end
   # 사용자 평균 별점 계산 코드
   def self.avg_rating(user)

@@ -131,3 +131,44 @@ a:visited {
 .my_info:link { color: WHITE; text-decoration: none; }
 .my_info:visited { color: WHITE; text-decoration: none; }
 .my_info:hover { color: WHITE; text-decoration: none; }
+
+/* css style for notification*/
+#noti_click {
+    color: white;
+    margin-right: 10px;
+}
+
+#noti_click:hover {
+    background-color: rgba(255,255,255,0.2);
+}
+
+#noti_html {
+    background-color: rgba(255, 255, 255, 0.8); //임시로 지정
+    border-radius: 15px;
+    width: 20%;
+    height: auto;
+    max-height: 30%;
+    padding: 10px 5px;
+    border: 1px solid slategray;
+    position: fixed;
+    top: 60px;
+    right: 10px;
+    text-align: center;
+    overflow-x: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow-y: scroll;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+#noti_delete {
+    color: rgb(96, 118, 79);
+}
+
+#noti_close {
+    color: rgb(96, 118, 79);
+    font-weight: bold;
+}

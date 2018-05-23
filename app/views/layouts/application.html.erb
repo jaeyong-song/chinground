@@ -12,6 +12,9 @@
 
     <!--icon library(ex. starring)-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+    <!--google material icon library-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <title>친그라운드</title>
   </head>
@@ -60,10 +63,12 @@
             <% end %>
         </ul>
         <% if user_signed_in? %>
-          <a onclick="showHide('info_html')" onfocus="this.blur()"><b>알림(<%= current_user.new_notifications.unread_by(current_user).count %>)</b></a>
-          <div id="info_html" style="display:none; margin-top: 10px;">
+          <a id="noti_click" onclick="showHide('noti_html')"><b><i class="material-icons">priority_high</i>(<%= current_user.new_notifications.unread_by(current_user).count %>)</b></a>
+          <div id="noti_html" style="display:none; margin-top: 10px;">
             <%= render partial: "new_notifications/new_notification", collection: current_user.new_notifications.unread_by(current_user) %>
-            <%= link_to '<b>모든 알림 지우기</b>'.html_safe, new_notifications_read_all_path %>
+            <br>
+            <%= link_to '<b>모든 알림 지우기</b>'.html_safe, new_notifications_read_all_path, id: 'noti_delete' %>
+            <a href="#" id="noti_close" onclick="showHide('noti_html')">| X (알림닫기)</a>
           </div>
         <% end %>
         <form class="form-inline mt-2 mt-md-0" action='/article/search' method="post">
