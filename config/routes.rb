@@ -2,6 +2,9 @@ Rails.application.routes.draw do
   devise_for :users
   root 'welcome#index'
   
+  # ActionCable setting(채팅)
+  mount ActionCable.server => '/cable'
+  
   # 마이 페이지 관련
   get '/mypage' => 'welcome#mypage'
   get '/myground' => 'welcome#myground'
@@ -55,13 +58,15 @@ Rails.application.routes.draw do
   
   # =========================================
 
-  # for 'chatroom management'
-  get '/chatroom/show'
-  
   # notification routing
   #알림 : 전체 삭제
   get '/new_notifications/read_all' => 'new_notifications#read_all'
   #알림
   resources :new_notifications
+  
+  # 채팅방 구현
+  get '/article/:id/chatroom/new' => 'chatroom#new'
+  post '/article/:id/chatroom/create' => 'chatroom#create'
+  get '/article/:id/chatroom/index' => 'chatroom#index'
 
 end
