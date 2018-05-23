@@ -1,2 +1,18 @@
-<h1>Chatrooms#index</h1>
-<p>Find me in app/views/chatrooms/index.html.erb</p>
+<h3>나의 채팅방 현황</h3>
+
+<table>
+    <thead>
+        <th>번호</th>
+        <th>채팅방 이름</th>
+        <th>보기</th>
+    </thead>
+    <tbody>
+        <% @my_chatrooms.each do |chatroom| %>
+            <tr>
+                <td><%= chatroom.id %></td>
+                <th><%= chatroom.name %></th>
+                <th><%= link_to '보기', "/chatroom/#{chatroom.id}" %></th>
+            </tr>
+        <% end %>
+    </tbody>
+</table>

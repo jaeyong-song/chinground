@@ -16,6 +16,7 @@ class ChatroomsController < ApplicationController
   end
 
   # post '/article/article_id/chatroom/create'
+  # 게시물 작성 시 자동으로 채팅방 생성되도록 만들어야함.
   def create
     @chatroom = Chatroom.new(chatroom_params)
     # 생성하면서 게시물의 참여자들을 자동으로 참여시켜야함
@@ -24,7 +25,7 @@ class ChatroomsController < ApplicationController
       @chatroom.users << User.find(articleuser.user_id)
     end
     @chatroom.save
-    redirect_to "/article/#{params[:article_id]}/chatroom/index"
+    redirect_to "/chatroom/index"
   end
 
   def edit

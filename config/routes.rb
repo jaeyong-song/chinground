@@ -65,8 +65,10 @@ Rails.application.routes.draw do
   resources :new_notifications
   
   # 채팅방 구현
-  get '/article/:id/chatroom/new' => 'chatroom#new'
-  post '/article/:id/chatroom/create' => 'chatroom#create'
-  get '/article/:id/chatroom/index' => 'chatroom#index'
+  get '/chatroom/new' => 'chatroom#new'
+  post '/chatroom/create' => 'chatroom#create'
+  get '/chatroom/index' => 'chatroom#index'
+  get '/chatroom/show/:id' => 'chatroom#show'
+  get 'chatroom/destroy/:id' => 'chatroom#destroy'
 
 end

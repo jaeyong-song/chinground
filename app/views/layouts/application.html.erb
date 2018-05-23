@@ -114,7 +114,7 @@
                 <% if temp.active == true %>
                 <tr>
                     <td scope="row"><%= article_id %></td>
-                    <td><%= link_to "#{temp.title}", "/article/show/#{article_id}", style: "color:white;" %></td>
+                    <td><%= link_to "#{temp.title}", "/article/show/#{article_id}", style: "color:white; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;" %></td>
                     <td><%= temp.place %></td>
                     <td><%= link_to '보기', "/article/show/#{article_id}", style: "color:white;" %></td>
                 </tr>
