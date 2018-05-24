@@ -66,10 +66,10 @@
         <% if user_signed_in? %>
           <a id="noti_click" onclick="showHide('noti_html')"><b><i class="material-icons">priority_high</i>(<%= current_user.new_notifications.unread_by(current_user).count %>)</b></a>
           <div id="noti_html" style="display:none; margin-top: 10px;">
-            <%= render partial: "new_notifications/new_notification", collection: current_user.new_notifications.unread_by(current_user) %>
-            <br>
             <%= link_to '<b>모든 알림 지우기</b>'.html_safe, new_notifications_read_all_path, id: 'noti_delete' %>
             <a href="#" id="noti_close" onclick="showHide('noti_html')">| X (알림닫기)</a>
+            <br>
+            <%= render partial: "new_notifications/new_notification", collection: current_user.new_notifications.unread_by(current_user) %>
           </div>
         <% end %>
         <form class="form-inline mt-2 mt-md-0" action='/article/search' method="post">

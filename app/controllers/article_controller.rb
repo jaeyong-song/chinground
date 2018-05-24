@@ -1,7 +1,7 @@
 class ArticleController < ApplicationController
   before_action :authenticate_user!
   before_action :find_params, only: [:show, :edit, :destroy, :complete, :participate,:participate_cancel]
-  before_action :match_user, only: [:edit, :destroy]
+  before_action :match_user, only: [:edit, :destroy, :complete]
   # 글 수정 및 삭제 시 자신의 글이 아니면 삭제 및 수정이 되지 않도록.
   # [OPTIMIZE] 현재 임시로 만들어 놓았고 문제 없나 확인해야함.
   def index
@@ -90,6 +90,8 @@ class ArticleController < ApplicationController
       @article.save
       flash[:success] = "모임이 완료되었습니다"
     end
+    # 모임 완료 후에는 채팅방 자동으로 삭제!
+    @article.chatroom.destroy
     redirect_to "/article/show/#{params[:id]}"
   end
   
@@ -190,9 +192,9 @@ class ArticleController < ApplicationController
   # prevent another user from destroy or edit article
   def match_user
     if @article.user != current_user
-      flash[:error] = "삭제 및 수정 권한이 없습니다"
+      flash[:error] = "삭제 및 수정, 모임 완료 권한이 없습니다"
       #권한 없음 플래시 메시지
-      redirect_to '/article'
+      redirect_back(fallback_location: "/article/")
     end
   end
 end
