@@ -1,13 +1,4 @@
-<!--<h3>채팅방 이름: <%#= @chatroom.name %></h3>-->
-
-<!--[TODO]추후에 자신이 쓴 message는 float 오른쪽,
-나머지는 float 왼쪽으로 몰아주도록 수정할 것-->
-
-<!--<%# @messages.each do |message| %>-->
-<!--<div class="messages" style="<%#= 'float:right;' if message.user = current_user %>">-->
-<!--    <p><%#= message %></p>-->
-<!--</div>-->
-<!--<%# end %>-->
+<%= stylesheet_link_tag "chatrooms" %>
 
 <!-- 이 div가 채팅룸 켜주기 때문에 삭제하면 안됨-->
 <div id="chatroom_chk"></div>
@@ -17,12 +8,20 @@
 <h5><%= @chatroom.article.title %>의 채팅방입니다</h5>
 
 <hr>
-<ul id="messages">
-  <% @chatroom.messages.each do |message| %>
-  <li><%= message.user.email %>: <%= message.content %></li>
-  <% end %>
-</ul>
-<form>
-  <label>말해주세요!: </label><br>
-  <input type="text" data-behavior="chatroom_speaker">
+<div id="chat_area">
+  <ul id="messages">
+    <% @chatroom.messages.each do |message| %>
+      <% if message.user == current_user %>
+        <li class="my_msg"><%= message.content %></li>
+      <% else %>
+        <li class="others_msg"><%= message.user.email %><br><%= message.content %></li>
+      <% end %>
+    <% end %>
+  </ul>
+</div>
+<script>
+$("#chat_area").scrollTop($("#chat_area")[0].scrollHeight);
+</script>
+<form id="msg_ipt">
+  <input type="text" data-behavior="chatroom_speaker" placeholder="입력은 Enter">
 </form>
