@@ -9,8 +9,15 @@
 <!--</div>-->
 <!--<%# end %>-->
 
+<h3><%= @chatroom.name %></h3>
+<hr>
+<h5><%= @chatroom.article.title %>의 채팅방입니다</h5>
+
+<hr>
 <ul id="messages">
-  <!--<%#= render @messages %> -->
+  <% @chatroom.messages.each do |message| %>
+  <li><%= message.user.email %>: <%= message.content %></li>
+  <% end %>
 </ul>
 <form>
   <label>말해주세요!: </label><br>

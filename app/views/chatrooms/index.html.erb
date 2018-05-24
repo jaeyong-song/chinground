@@ -11,7 +11,7 @@
             <tr>
                 <td><%= chatroom.id %></td>
                 <th><%= chatroom.name %></th>
-                <th><%= link_to '보기', "/chatroom/#{chatroom.id}" %></th>
+                <th><%= link_to '보기', "/chatroom/show/#{chatroom.id}" %></th>
             </tr>
         <% end %>
     </tbody>

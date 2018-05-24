@@ -9,7 +9,6 @@ class ChatroomsController < ApplicationController
   end
 
   def show
-    @messages = chatroom.messages.reverse
   end
 
   def new

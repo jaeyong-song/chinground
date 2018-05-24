@@ -1,4 +1,4 @@
-App.chatroom = App.cable.subscriptions.create "ChatroomChannel",
+App.chatroom = App.cable.subscriptions.create {channel: "ChatroomChannel", room: window.location.pathname.split("/")[3]},
   connected: ->
     # Called when the subscription is ready for use on the server
 
