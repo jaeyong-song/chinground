@@ -1,6 +1,6 @@
 class ArticleController < ApplicationController
   before_action :authenticate_user!
-  before_action :find_params, only: [:show, :edit, :destroy, :complete, :participate_cancel]
+  before_action :find_params, only: [:show, :edit, :destroy, :complete, :participate,:participate_cancel]
   before_action :match_user, only: [:edit, :destroy]
   # 글 수정 및 삭제 시 자신의 글이 아니면 삭제 및 수정이 되지 않도록.
   # [OPTIMIZE] 현재 임시로 만들어 놓았고 문제 없나 확인해야함.
@@ -114,6 +114,13 @@ class ArticleController < ApplicationController
     @new_notification = NewNotification.create! user: current_user,
                           content: "#{params[:id]}번 글에 참가했습니다",
                           link: "/article/show/#{params[:id]}"
+                          
+    # 만약 채팅방에 개설되어 있다면 자동 참여되도록 만들어야함
+    if @article.chatroom.present?
+      chatroom = @article.chatroom
+      chatroom.users << current_user
+    end
+    
     redirect_to "/article/show/#{params[:id]}"
   end
   
@@ -160,6 +167,12 @@ class ArticleController < ApplicationController
       @new_notification = NewNotification.create! user: current_user,
                           content: "#{params[:id]}번 글에서 참가 취소되었습니다.",
                           link: "/article/show/#{params[:id]}"
+    end
+    
+    # 취소하면 자동으로 채팅방에서 나가게 만들어야함
+    if @article.chatroom.present?
+      chatroom = @article.chatroom
+      chatroom.users = chatroom.users - [current_user]
     end
     redirect_to "/article/show/#{params[:id]}"
   end

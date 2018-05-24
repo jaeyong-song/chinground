@@ -47,6 +47,13 @@
   </form>
   <% end %>
   
+  <!--채팅방 개설 기능-->
+  <form action="/chatroom/new" method="post">
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+    <input type="hidden" name="article_id" value="<%= @article.id %>">
+    <button type="submit" class="btn">채팅방 개설</button>
+  </form>
+  
   <hr>
   <!-- 만약 모임이 아직 끝나지 않았다면 -->
   <%= link_to '모임완료', "/article/complete/#{@article.id}", data: { confirm: "모임이 끝나셨나요? 확인 버튼을 누르시면 모임이 끝나고 마이페이지에서 평가하시면 됩니다" } %>

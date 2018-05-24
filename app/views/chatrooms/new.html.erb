@@ -1,2 +1,8 @@
-<!--게시물 생성 시 자동으로 채팅방 개설하도록
-만들기 때문에 new 페이지가 필요하지 않음......-->
+<h3><%= @article.title %> 게시물의 채팅방을 개설합니다</h3>
+
+<form action="/chatroom/create" method="post" class="form-group">
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+    <input type="hidden" name="article_id" value="<%= @article.id %>">
+    <input type="text" placeholder="개설할 채팅방 이름을 입력..." name="name" class="form-control">
+    <button type="submit" class="btn">개설</button>
+</form>
