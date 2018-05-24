@@ -1,6 +1,7 @@
 class ChatroomsController < ApplicationController
   before_action :authenticate_user!
   before_action :find_chatroom, only: [:show, :edit, :update, :destroy]
+  before_action :is_writer, only: [:edit, :update, :destroy]
   
   def index
     # 친그라운드에서는 자기가 참여한 곳에만 채팅 구현
@@ -41,6 +42,7 @@ class ChatroomsController < ApplicationController
 
   def destroy
     @chatroom.destroy
+    redirect_back(fallback_location: "/article/show/#{@chatroom.article.id}")
   end
 
   def participate
@@ -53,4 +55,12 @@ class ChatroomsController < ApplicationController
   def find_chatroom
     @chatroom = Chatroom.find(params[:id])
   end
+  # 게시물 작성자만 채팅방 수정가능
+  def is_writer
+    if @chatroom.article.user_id != current_user.id
+      flash[:error] = "게시물 작성자만 채팅방 수정 및 삭제가 가능합니다"
+      redirect_back(fallback_location: root_path)
+    end
+  end
+  
 end

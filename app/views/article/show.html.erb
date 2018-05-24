@@ -48,11 +48,18 @@
   <% end %>
   
   <!--채팅방 개설 기능-->
-  <form action="/chatroom/new" method="post">
-    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-    <input type="hidden" name="article_id" value="<%= @article.id %>">
-    <button type="submit" class="btn">채팅방 개설</button>
-  </form>
+  <!-- 채팅룸이 있고 게시물 작성자인 경우-->
+  <% if @article.chatroom.present? && @article.user_id == current_user.id %>
+    <%= link_to "채팅방 삭제", "/chatroom/destroy/#{@article.chatroom.id}", class: 'btn', data: { confirm: "채팅방을 삭제하시겠습니까??" } %>
+  <% elsif @article.chatroom.present? == false && @article.user_id == current_user.id %>
+    <form action="/chatroom/new" method="post">
+      <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+      <input type="hidden" name="article_id" value="<%= @article.id %>">
+      <button type="submit" class="btn">채팅방 개설</button>
+    </form>
+  <% else %>
+    <p>채팅방은 게시물 권한자만 개설 및 삭제할 수 있습니다.</p>
+  <% end %>
   
   <hr>
   <!-- 만약 모임이 아직 끝나지 않았다면 -->
