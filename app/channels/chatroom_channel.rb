@@ -1,6 +1,6 @@
 class ChatroomChannel < ApplicationCable::Channel
   def subscribed
-    stream_from "chatroom_channel"
+    stream_from "#{params[:id]}_channel"
     # 나중에 params[:id]로 수정
   end
 
@@ -9,6 +9,6 @@ class ChatroomChannel < ApplicationCable::Channel
   end
 
   def speak(data)
-    Message.create! content: data["message"], user_id: 1, chatroom_id: 1
+    Message.create! content: data["message"], user_id: current_user.id, chatroom_id: params[:id]
   end
 end
