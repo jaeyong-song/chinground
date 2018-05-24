@@ -1,14 +1,18 @@
-<h3>채팅방 이름: <%= @chatroom.name %></h3>
+<!--<h3>채팅방 이름: <%#= @chatroom.name %></h3>-->
 
 <!--[TODO]추후에 자신이 쓴 message는 float 오른쪽,
 나머지는 float 왼쪽으로 몰아주도록 수정할 것-->
 
-<!--<% @messages.each do |message| %>-->
-<!--<div class="messages" style="<%= 'float:right;' if message.user = current_user %>">-->
-<!--    <p><%= message %></p>-->
+<!--<%# @messages.each do |message| %>-->
+<!--<div class="messages" style="<%#= 'float:right;' if message.user = current_user %>">-->
+<!--    <p><%#= message %></p>-->
 <!--</div>-->
-<!--<% end %>-->
+<!--<%# end %>-->
 
-<div id="messages">
-  <%= render @messages %> 
-</div>
+<ul id="messages">
+  <!--<%#= render @messages %> -->
+</ul>
+<form>
+  <label>말해주세요!: </label><br>
+  <input type="text" data-behavior="chatroom_speaker">
+</form>

@@ -34,10 +34,10 @@ ActiveRecord::Schema.define(version: 20180523061117) do
 
   create_table "chatroom_users", force: :cascade do |t|
     t.integer "user_id"
-    t.integer "room_id"
+    t.integer "chatroom_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["room_id"], name: "index_chatroom_users_on_room_id"
+    t.index ["chatroom_id"], name: "index_chatroom_users_on_chatroom_id"
     t.index ["user_id"], name: "index_chatroom_users_on_user_id"
   end
 
@@ -62,10 +62,10 @@ ActiveRecord::Schema.define(version: 20180523061117) do
   create_table "messages", force: :cascade do |t|
     t.text "content"
     t.integer "user_id"
-    t.integer "room_id"
+    t.integer "chatroom_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["room_id"], name: "index_messages_on_room_id"
+    t.index ["chatroom_id"], name: "index_messages_on_chatroom_id"
     t.index ["user_id"], name: "index_messages_on_user_id"
   end
 

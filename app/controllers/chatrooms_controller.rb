@@ -1,6 +1,6 @@
 class ChatroomsController < ApplicationController
   before_action :authenticate_user!
-  before_action :find_chatroom, only: [:show, :edit, :update, :destroy]
+  # before_action :find_chatroom, only: [:show, :edit, :update, :destroy]
   
   def index
     # 친그라운드에서는 자기가 참여한 곳에만 채팅 구현
@@ -8,7 +8,7 @@ class ChatroomsController < ApplicationController
   end
 
   def show
-    @messages = chatroom.messages.reverse
+    # @messages = chatroom.messages.reverse
   end
 
   def new
