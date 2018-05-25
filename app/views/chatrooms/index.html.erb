@@ -1,17 +1,19 @@
 <h3>나의 채팅방 현황</h3>
 
-<table>
-    <thead>
-        <th>번호</th>
-        <th>채팅방 이름</th>
-        <th>보기</th>
+<table class="table table-hover">
+    <thead class="thead-light">
+        <th scope="col" class="before">번호</th>
+        <th scope="col" class="before">채팅방 이름</th>
+        <th scope="col" class="before">채팅방의 게시물 이름</th>
+        <th scope="col" class="before">보기</th>
     </thead>
     <tbody>
         <% @my_chatrooms.each do |chatroom| %>
             <tr>
-                <td><%= chatroom.id %></td>
-                <th><%= chatroom.name %></th>
-                <th><%= link_to '보기', "/chatroom/show/#{chatroom.id}" %></th>
+                <td scope="row"><%= chatroom.id %></td>
+                <td><%= chatroom.name %></td>
+                <td><%= chatroom.article.title %></td>
+                <td><%= link_to '보기', "/chatroom/show/#{chatroom.id}" %></td>
             </tr>
         <% end %>
     </tbody>
