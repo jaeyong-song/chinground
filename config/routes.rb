@@ -1,10 +1,17 @@
 Rails.application.routes.draw do
+  get 'users/index'
+  get 'users/show'
+  get 'users/find'
   devise_for :users
   root 'welcome#index'
   
   # 마이 페이지 관련
   get '/mypage' => 'welcome#mypage'
   get '/myground' => 'welcome#myground'
+  
+  # Users 관련
+  post '/users/search' => 'users#search'
+  get '/users/search' => 'users#search'
   
   # =========================================
 

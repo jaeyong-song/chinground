@@ -45,6 +45,13 @@
             <li class="nav-item <%= 'active' if request.original_fullpath == '/rating' %>">
             <a class="nav-link" href="/rating" style="color:white;">별점</a>
             </li>
+            <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="dropdown0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="color:white;">친구들</a>
+            <div class="dropdown-menu" aria-labelledby="dropdown0">
+                <a class="dropdown-item" href="/users/index">나의 친구들</a>
+                <a class="dropdown-item" href="/users/search">친구찾기</a>
+            </div>
+            </li>
             <% if user_signed_in? %>
             <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="color:white;"><%= current_user.email %></a>

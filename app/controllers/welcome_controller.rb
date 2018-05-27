@@ -21,12 +21,6 @@ class WelcomeController < ApplicationController
     #[TODO] 본인 프로필 보여주기, 본인이 참가한 총 게시물 등 통계 보여주기
   end
   
-  # 친구(팔로우 기능 구현)
-  def follow
-    @my_followers = current_user.follower
-    @my_followings = current_user.followed
-  end
-  
   def myground
     @my_all = WelcomeController.find_my_all(current_user.id).reverse
   end
