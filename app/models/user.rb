@@ -18,4 +18,19 @@ class User < ApplicationRecord
   # 채팅방 문맥 이해 불가
   has_many :messages
   has_many :chatrooms, through: :chatroom_users
+  
+  has_many :followed_follows, foreign_key: :follower_id, class_name: "Follow"
+  has_many :followeds, through: :followers_follows, source: :follower
+  
+  has_many :follower_follows, foreign_key: :follwed_id, class_name: "Follow"
+  has_many :followers, through: :followeds_follows, source: :followed
+  
+  def toggle_follow(user)
+    if self.follower.include?(user)
+      self.follower.delete(user)
+    else
+      self.follower << user
+    end
+  end
+  
 end
