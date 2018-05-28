@@ -11,7 +11,7 @@
     <tr>
       <th scope="col">번호</th></th>
       <th scope="col">email</th>
-      <th scope="col">친구?</th>
+      <th scope="col">팔로잉?</th>
       <th scope="col">follow</th>
       <th scope="col">프로필 보기</th>
       <!--이것도 추후 수정 필요!!-->
@@ -24,9 +24,9 @@
       <td><%= user.email %></td>
       <td><%= current_user.followers.include?(user) ? "YES" : "NO" %></td>
       <% if current_user.followers.include?(user) %>
-      <td><%= link_to '친구끊기', "/users/follow/#{user.id}", method: :post %></td>
+      <td><%= link_to '팔로우끊기', "/users/follow/#{user.id}", method: :post %></td>
       <% else %>
-      <td><%= link_to '친구되기', "/users/follow/#{user.id}", method: :post %></td>
+      <td><%= link_to '팔로우하기', "/users/follow/#{user.id}", method: :post %></td>
       <% end %>
       <td><%= link_to '프로필 보기', "/users/show/#{user.id}" %></td>
     </tr>

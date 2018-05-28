@@ -18,6 +18,13 @@ class ArticleController < ApplicationController
     # 만약에 게시글을 생성하면 본인은 자동으로 추가되도록 만들 것
     ArticleUser.create({ article_id: article_tmp.id, user_id: current_user.id })
     #should include user input by. current_user.id method
+    # 만약에 한 유저가 게시물을 생성했으면 그 팔로워들에게 게시물 생성되었음을
+    # 알려주어야 함!
+    current_user.followees.each do |user|
+      @new_notification = NewNotification.create! user: User.find(user.id),
+                          content: "#{current_user.email}님이 #{article_tmp.id}번 그라운드를 생성했습니다",
+                          link: "/article/show/#{article_tmp.id}"
+    end
     flash[:success] = "게시물 생성이 완료되었습니다"
     redirect_to '/article'
   end
