@@ -31,8 +31,10 @@ class User < ApplicationRecord
     end
     if self.followees.include?(user)
       self.followees.delete(user)
+      return 0 # 관계 삭제시 0 반환
     else
       self.followees << user
+      return 1 # 관계 형성 시 1 반환
     end
   end
   
