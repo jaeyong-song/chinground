@@ -12,6 +12,9 @@ Rails.application.routes.draw do
   # Users 관련
   post '/users/search' => 'users#search'
   get '/users/search' => 'users#search'
+  get '/users/show/:id' => 'users#show'
+  get '/users/index' => 'users#index'
+  post '/users/follow/:id' => 'users#follow'
   
   # =========================================
 

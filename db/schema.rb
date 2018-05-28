@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_27_115507) do
+ActiveRecord::Schema.define(version: 2018_05_28_030603) do
 
   create_table "article_users", force: :cascade do |t|
     t.integer "article_id"
@@ -61,10 +61,10 @@ ActiveRecord::Schema.define(version: 2018_05_27_115507) do
 
   create_table "follows", force: :cascade do |t|
     t.integer "follower_id"
-    t.integer "followed_id"
+    t.integer "followee_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["followed_id"], name: "index_follows_on_followed_id"
+    t.index ["followee_id"], name: "index_follows_on_followee_id"
     t.index ["follower_id"], name: "index_follows_on_follower_id"
   end
 

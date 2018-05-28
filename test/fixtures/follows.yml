@@ -2,8 +2,8 @@
 
 one:
   follower: one
-  followed: one
+  followee: one
 
 two:
   follower: two
-  followed: two
+  followee: two

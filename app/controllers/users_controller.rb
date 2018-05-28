@@ -17,7 +17,7 @@ class UsersController < ApplicationController
   # 친구(팔로우 기능 구현)
   # POST users/:id/follow
   def follow
-    @user.toggle_folloew(current_user)
+    @user.toggle_follow(current_user)
     redirect_back(fallback_location: root_path)
   end
   

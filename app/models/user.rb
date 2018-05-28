@@ -19,17 +19,17 @@ class User < ApplicationRecord
   has_many :messages
   has_many :chatrooms, through: :chatroom_users
   
-  has_many :followed_follows, foreign_key: :follower_id, class_name: "Follow"
-  has_many :followeds, through: :followers_follows, source: :follower
+  has_many :followee_follows, foreign_key: :follower_id, class_name: "Follow"
+  has_many :followees, through: :followee_follows, source: :followee
   
-  has_many :follower_follows, foreign_key: :follwed_id, class_name: "Follow"
-  has_many :followers, through: :followeds_follows, source: :followed
+  has_many :follower_follows, foreign_key: :followee_id, class_name: "Follow"
+  has_many :followers, through: :follower_follows, source: :follower
   
   def toggle_follow(user)
-    if self.follower.include?(user)
-      self.follower.delete(user)
+    if self.followees.include?(user)
+      self.followees.delete(user)
     else
-      self.follower << user
+      self.followees << user
     end
   end
   
