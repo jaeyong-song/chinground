@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   get '/users/show/:id' => 'users#show'
   get '/users/index' => 'users#index'
   post '/users/follow/:id' => 'users#follow'
+  get '/users/myprofile' => 'users#myprofile'
   
   # =========================================
 

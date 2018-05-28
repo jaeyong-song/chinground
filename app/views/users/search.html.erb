@@ -13,6 +13,7 @@
       <th scope="col">email</th>
       <th scope="col">친구?</th>
       <th scope="col">follow</th>
+      <th scope="col">프로필 보기</th>
       <!--이것도 추후 수정 필요!!-->
     </tr>
   </thead>
@@ -21,9 +22,13 @@
     <tr>
       <th scope="row"><%= user.id %></th>
       <td><%= user.email %></td>
-      <td><%#= user.name %></td>
+      <td><%= current_user.followers.include?(user) ? "YES" : "NO" %></td>
+      <% if current_user.followers.include?(user) %>
+      <td><%= link_to '친구끊기', "/users/follow/#{user.id}", method: :post %></td>
+      <% else %>
       <td><%= link_to '친구되기', "/users/follow/#{user.id}", method: :post %></td>
-      <td></td>
+      <% end %>
+      <td><%= link_to '프로필 보기', "/users/show/#{user.id}" %></td>
     </tr>
     <% end %>
   </tbody>

@@ -26,6 +26,9 @@ class User < ApplicationRecord
   has_many :followers, through: :follower_follows, source: :follower
   
   def toggle_follow(user)
+    if self == user
+      return -1 # 본인과는 친구가 될 수 없으므로 -1 반환
+    end
     if self.followees.include?(user)
       self.followees.delete(user)
     else
