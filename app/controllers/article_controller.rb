@@ -1,7 +1,7 @@
 class ArticleController < ApplicationController
   before_action :authenticate_user!
-  before_action :find_params, only: [:show, :edit, :destroy, :complete, :participate_cancel]
-  before_action :match_user, only: [:edit, :destroy]
+  before_action :find_params, only: [:show, :edit, :destroy, :complete, :participate,:participate_cancel]
+  before_action :match_user, only: [:edit, :destroy, :complete]
   # 글 수정 및 삭제 시 자신의 글이 아니면 삭제 및 수정이 되지 않도록.
   # [OPTIMIZE] 현재 임시로 만들어 놓았고 문제 없나 확인해야함.
   def index
@@ -18,6 +18,13 @@ class ArticleController < ApplicationController
     # 만약에 게시글을 생성하면 본인은 자동으로 추가되도록 만들 것
     ArticleUser.create({ article_id: article_tmp.id, user_id: current_user.id })
     #should include user input by. current_user.id method
+    # 만약에 한 유저가 게시물을 생성했으면 그 팔로워들에게 게시물 생성되었음을
+    # 알려주어야 함!
+    current_user.followees.each do |user|
+      @new_notification = NewNotification.create! user: User.find(user.id),
+                          content: "#{current_user.email}님이 #{article_tmp.id}번 그라운드를 생성했습니다",
+                          link: "/article/show/#{article_tmp.id}"
+    end
     flash[:success] = "게시물 생성이 완료되었습니다"
     redirect_to '/article'
   end
@@ -90,6 +97,8 @@ class ArticleController < ApplicationController
       @article.save
       flash[:success] = "모임이 완료되었습니다"
     end
+    # 모임 완료 후에는 채팅방 자동으로 삭제!
+    @article.chatroom.destroy
     redirect_to "/article/show/#{params[:id]}"
   end
   
@@ -114,6 +123,13 @@ class ArticleController < ApplicationController
     @new_notification = NewNotification.create! user: current_user,
                           content: "#{params[:id]}번 글에 참가했습니다",
                           link: "/article/show/#{params[:id]}"
+                          
+    # 만약 채팅방에 개설되어 있다면 자동 참여되도록 만들어야함
+    if @article.chatroom.present?
+      chatroom = @article.chatroom
+      chatroom.users << current_user
+    end
+    
     redirect_to "/article/show/#{params[:id]}"
   end
   
@@ -161,6 +177,12 @@ class ArticleController < ApplicationController
                           content: "#{params[:id]}번 글에서 참가 취소되었습니다.",
                           link: "/article/show/#{params[:id]}"
     end
+    
+    # 취소하면 자동으로 채팅방에서 나가게 만들어야함
+    if @article.chatroom.present?
+      chatroom = @article.chatroom
+      chatroom.users = chatroom.users - [current_user]
+    end
     redirect_to "/article/show/#{params[:id]}"
   end
   
@@ -177,9 +199,9 @@ class ArticleController < ApplicationController
   # prevent another user from destroy or edit article
   def match_user
     if @article.user != current_user
-      flash[:error] = "삭제 및 수정 권한이 없습니다"
+      flash[:error] = "삭제 및 수정, 모임 완료 권한이 없습니다"
       #권한 없음 플래시 메시지
-      redirect_to '/article'
+      redirect_back(fallback_location: "/article/")
     end
   end
 end

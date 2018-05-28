@@ -1,2 +1,27 @@
-<h1>Chatrooms#show</h1>
-<p>Find me in app/views/chatrooms/show.html.erb</p>
+<%= stylesheet_link_tag "chatrooms" %>
+
+<!-- 이 div가 채팅룸 켜주기 때문에 삭제하면 안됨-->
+<div id="chatroom_chk"></div>
+
+<h3><%= @chatroom.name %></h3>
+<hr>
+<h5><%= @chatroom.article.title %>의 채팅방입니다</h5>
+
+<hr>
+<div id="chat_area">
+  <ul id="messages">
+    <% @chatroom.messages.each do |message| %>
+      <% if message.user == current_user %>
+        <li class="my_msg"><%= message.content %></li>
+      <% else %>
+        <li class="others_msg"><%= message.user.email %><br><%= message.content %></li>
+      <% end %>
+    <% end %>
+  </ul>
+</div>
+<form id="msg_ipt">
+  <input type="text" data-behavior="chatroom_speaker" placeholder="입력은 Enter">
+</form>
+<script>
+$("#chat_area").scrollTop($("#chat_area")[0].scrollHeight);
+</script>

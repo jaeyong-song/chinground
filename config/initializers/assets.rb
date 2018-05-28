@@ -20,3 +20,5 @@ Rails.application.config.assets.precompile += %w( myground.css )
 Rails.application.config.assets.precompile += %w( article.css )
 # rating-css
 Rails.application.config.assets.precompile += %w( rating.css )
+# chatrooms-css
+Rails.application.config.assets.precompile += %w( chatrooms.css )

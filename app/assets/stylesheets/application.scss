@@ -52,6 +52,7 @@ body {
 body > #section {
     padding: 60px 15px 0;
     font-family: 'Nanum Myeongjo', serif;
+    position: relative;
 }
 
 body > .container {
@@ -168,7 +169,15 @@ a:visited {
     color: rgb(96, 118, 79);
 }
 
+#noti_delete:hover {
+    color: orange;
+}
+
 #noti_close {
     color: rgb(96, 118, 79);
     font-weight: bold;
+}
+
+#noti_close:hover {
+    color: orange;
 }

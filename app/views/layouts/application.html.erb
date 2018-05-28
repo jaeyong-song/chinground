@@ -40,10 +40,18 @@
             <a class="nav-link" href="/myground" style="color:white;">나의 모임</a>
             </li>
             <li class="nav-item <%= 'active' if request.original_fullpath == '/chatroom/show' %>">
-            <a class="nav-link" href="/chatroom/show" style="color:white;">채팅</a>
+            <a class="nav-link" href="/chatroom/index" style="color:white;">채팅</a>
             </li>
             <li class="nav-item <%= 'active' if request.original_fullpath == '/rating' %>">
             <a class="nav-link" href="/rating" style="color:white;">별점</a>
+            </li>
+            <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="dropdown0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="color:white;">친구들</a>
+            <div class="dropdown-menu" aria-labelledby="dropdown0">
+                <a class="dropdown-item" href="/users/index">나의 친구들</a>
+                <a class="dropdown-item" href="/users/search">친구찾기</a>
+                <a class="dropdown-item" href="/users/myprofile">나의 프로필</a>
+            </div>
             </li>
             <% if user_signed_in? %>
             <li class="nav-item dropdown">
@@ -66,10 +74,10 @@
         <% if user_signed_in? %>
           <a id="noti_click" onclick="showHide('noti_html')"><b><i class="material-icons">priority_high</i>(<%= current_user.new_notifications.unread_by(current_user).count %>)</b></a>
           <div id="noti_html" style="display:none; margin-top: 10px;">
-            <%= render partial: "new_notifications/new_notification", collection: current_user.new_notifications.unread_by(current_user) %>
-            <br>
             <%= link_to '<b>모든 알림 지우기</b>'.html_safe, new_notifications_read_all_path, id: 'noti_delete' %>
             <a href="#" id="noti_close" onclick="showHide('noti_html')">| X (알림닫기)</a>
+            <br>
+            <%= render partial: "new_notifications/new_notification", collection: current_user.new_notifications.unread_by(current_user) %>
           </div>
         <% end %>
         <form class="form-inline mt-2 mt-md-0" action='/article/search' method="post">
@@ -105,19 +113,17 @@
                 <th scope="col">번호</th>
                 <th scope="col">제목</th>
                 <th scope="col">장소</th>
-                <th scope="col">관리</th>
               </tr>
             </thead>
             <tbody>
             <% WelcomeController.find_my_all(current_user.id).reverse.each do |article_id| %>
                 <% temp = Article.find(article_id) %>
                 <% if temp.active == true %>
-                <tr>
+                <a href="/article/show/#{article_id}"><tr>
                     <td scope="row"><%= article_id %></td>
-                    <td><%= link_to "#{temp.title}", "/article/show/#{article_id}", style: "color:white;" %></td>
-                    <td><%= temp.place %></td>
-                    <td><%= link_to '보기', "/article/show/#{article_id}", style: "color:white;" %></td>
-                </tr>
+                    <td style="color:white; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;"><%= link_to "#{temp.title}", "/article/show/#{article_id}", style: 'color:white; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;' %></td>
+                    <td style="color:white; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;"><%= temp.place %></td>
+                </tr></a>
                 <% end %>
             <% end %>
             </tbody>

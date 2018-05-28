@@ -1,4 +1,6 @@
-<li>
-    <%= message.content %>
-    <!--Message 객체에서 content만 보여줄 것-->
+<li class="my_msg">
+<%= message.content %>
 </li>
+<script>
+$("#chat_area").scrollTop($("#chat_area")[0].scrollHeight);
+</script>

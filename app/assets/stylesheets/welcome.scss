@@ -21,7 +21,7 @@ body{
     display: block;
     padding-top: 100%;
 }
-.square-content{
+.square-box>div{
     position:  absolute;
     top: 0;
     left: 0;
@@ -29,11 +29,18 @@ body{
     right: 0;
     color: white;
 }
-.square-content div {
+.square-content>div {
     display: table;
     padding-top: 30%;
     width: 100%;
     height: 100%;
+}
+.login-content>div {
+    display: table;
+    padding: 10% 15% 15% 15%;
+}
+.login-content div {
+    width: 100%;
 }
 .main-area {
     display: table-row;
@@ -41,6 +48,20 @@ body{
     text-align: center;
     color: white
 }
-.square-content h1{
+.help_user_area>a {
+    vertical-align: middle;
+    color: white;
+}
+.square-box h1{
     font-size: 2em;
+}
+
+.form-actions{
+    margin-top: 15px !important;
+    margin-bottom: 25px !important;
+    text-align: center;
+}
+
+.form-group.email.optional.user_email{
+    margin-top: 15px !important;
 }
