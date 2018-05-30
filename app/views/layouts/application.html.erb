@@ -132,6 +132,23 @@
             <% end %>
             </tbody>
           </table>
+          <p>나의 자유 채팅방 목록</p>
+          <table class="table table-hover" style="font-size: 12px;">
+            <thead>
+              <tr>
+                <th scope="col">번호</th>
+                <th scope="col">제목</th>
+              </tr>
+            </thead>
+            <tbody>
+            <% current_user.freechats.each do |freechat| %>
+                <a href="/freechats/show/<%= freechat.id %>"><tr>
+                    <td scope="row"><%= freechat.id %></td>
+                    <td style="color:white; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;"><%= link_to "#{freechat.name}", "/freechats/show/#{freechat.id}", style: 'color:white; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;' %></td>
+                </tr></a>
+            <% end %>
+            </tbody>
+          </table>
         </div>
     </a>
     <% end %>
