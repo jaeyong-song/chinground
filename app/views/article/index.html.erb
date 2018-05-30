@@ -1,7 +1,7 @@
 <%= stylesheet_link_tag "article" %>
 <h1 class="title">함께할 친구를 찾습니다</h1>
 
-<%= button_to '작성', "/article/new", class:"btn submit", :method => :get %>
+<%= button_to '작성', "/article/new", class:"btn", :method => :get %>
 <!--<button type="button" class="btn" style="float:right; margin-top: 10px; background-color: rgba(136, 176, 75);"><a href="/article/new" style="color:white;">작성</a></button>-->
 
 <div id="grid">
@@ -22,7 +22,7 @@
 <script>
 $ (function () {
     // #container 부하의 div가 그릿 레이아웃으로 정렬됩니다
-    $ ("#grid"). vgrid ({
+    $ ( "#grid"). vgrid ({
         easing : "easeOutQuint"
         time : 500
         delay : 20
