@@ -35,6 +35,9 @@ Rails.application.routes.draw do
   #검색
   post '/article/search' => 'article#search'
   get '/article/search' => 'article#search'
+  
+  # 강퇴관련
+  post '/article/out/:id' => 'article#out'
   # =========================================
   
   # 댓글 관련

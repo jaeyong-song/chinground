@@ -8,22 +8,22 @@
 @font-face{
     font-family: 'SpoqaHanSans-Regular';
     src: local('SpoqaHanSans-Regular'),
-        url('Spoqa Han Sans Regular.woff') format('woff');
+        font-url('SpoqaHanSansRegular.woff') format('woff');
 }
 @font-face{
     font-family: 'SpoqaHanSans-Light';
     src: local('SpoqaHanSans-Light'),
-        url('Spoqa Han Sans Light.woff') format('woff');
+        font-url('SpoqaHanSansLight.woff') format('woff');
 }
 @font-face{
     font-family: 'SpoqaHanSans-Thin';
     src: local('SpoqaHanSans-Thin'),
-        url('Spoqa Han Sans Thin.woff') format('woff');
+        font-url('SpoqaHanSansThin.woff') format('woff');
 }
 @font-face{
     font-family: 'SpoqaHanSans-Bold';
     src: local('SpoqaHanSans-Bold'),
-        url('Spoqa Han Sans Bold.woff') format('woff');
+        font-url('SpoqaHanSansBold.woff') format('woff');
 }
 /* Sticky footer styles
 -------------------------------------------------- */

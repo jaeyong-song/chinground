@@ -9,6 +9,7 @@
 
 <%= button_to '친구추가', "/freechats/new_users/#{@freechat.id}", class:"btn submit", :method => :get %>
 <%= button_to '나가기', "/freechats/out/#{@freechat.id}", class:"btn submit", :method => :get %>
+<p>나가기 시 자동으로 초대거부 상태가 됩니다^^</p>
 
 <div class="joined_list">
 <h3>현재 참여자</h3>

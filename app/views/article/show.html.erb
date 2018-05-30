@@ -16,7 +16,16 @@
   <p>현재 참여한 사람: </p>
   <p><% @participants.each do |participant| %>
   <%= participant.email %>, 별점: <%= RatingController.avg_rating(participant.id) %> | 
+  <!-- 강제 참가취소 기능은 게시물 작성자만 가능하도록 만들 것!-->
+    <% if @user == current_user %>
+      <form action="/article/out/<%= @article.id %>" method="post" class="form-group">
+        <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+        <input type="hidden" value="<%= participant.id %>" name="user_id" class="form-control">
+        <button type="submit" class="btn">강퇴</button>
+      </form>
+    <% end %>
   <% end %></p>
+  <p>강퇴는 게시물 권한자만 가능합니다</p>
   
 
   <!-- 참가 기능 추가 / 참고로, 본인인 경우에는 게시물 작성 시 자동으로 참가 되도록 만들어야함.-->
