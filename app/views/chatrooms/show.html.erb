@@ -7,6 +7,15 @@
 <hr>
 <h5><%= @chatroom.article.title %>의 채팅방입니다</h5>
 
+<div class="joined_list">
+<h3>현재 참여자</h3>
+  <ul>
+  <% @chatroom.users.each do |user| %>  
+    <li><%= user.email %></li>
+  <% end %>
+  </ul>
+</div>
+
 <hr>
 <div id="chat_area">
   <ul id="messages">

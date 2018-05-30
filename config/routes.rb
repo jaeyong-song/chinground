@@ -80,4 +80,7 @@ Rails.application.routes.draw do
   get '/freechats/new' => 'freechats#new'
   get '/freechats/show/:id' => 'freechats#show'
   post '/freechats/create' => 'freechats#create'
+  get '/freechats/new_users/:id' => 'freechats#new_users'
+  post '/freechats/add_users/:id' => 'freechats#add_users'
+  get '/freechats/out/:id' => 'freechats#out'
 end
