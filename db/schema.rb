@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_30_033723) do
+ActiveRecord::Schema.define(version: 2018_05_30_090525) do
 
   create_table "article_users", force: :cascade do |t|
     t.integer "article_id"
@@ -130,6 +130,15 @@ ActiveRecord::Schema.define(version: 2018_05_30_033723) do
     t.index ["readable_type", "readable_id"], name: "index_read_marks_on_readable_type_and_readable_id"
     t.index ["reader_id", "reader_type", "readable_type", "readable_id"], name: "read_marks_reader_readable_index", unique: true
     t.index ["reader_type", "reader_id"], name: "index_read_marks_on_reader_type_and_reader_id"
+  end
+
+  create_table "reject_freechats", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "freechat_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["freechat_id"], name: "index_reject_freechats_on_freechat_id"
+    t.index ["user_id"], name: "index_reject_freechats_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|

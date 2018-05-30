@@ -29,6 +29,9 @@ class User < ApplicationRecord
   has_many :follower_follows, foreign_key: :followee_id, class_name: "Follow"
   has_many :followers, through: :follower_follows, source: :follower
   
+  has_many :reject_freechats, dependent: :destroy
+  has_many :rejected_freechats, through: :reject_freechats, source: :freechat
+  
   def toggle_follow(user)
     if self == user
       return -1 # 본인과는 친구가 될 수 없으므로 -1 반환

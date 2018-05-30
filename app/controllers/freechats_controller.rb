@@ -28,15 +28,21 @@ class FreechatsController < ApplicationController
   # POST /freechats/add_users/:id
   def add_users
     user = User.find(params[:user_id])
-    @freechat.users << user
-    @freechat.save
-    @freechat.users.each do |u|
-      @new_notification = NewNotification.create! user: u,
-                          content: "#{@freechat.id}번 자유채팅에 #{u.email}님이 참가했습니다",
-                          link: "/freechats/show/#{params[:id]}"
+    # 만약에 초대 거부 상태가 아니라면
+    unless @freechat.rejected_users.include?(user)
+      @freechat.users << user
+      @freechat.save
+      @freechat.users.each do |u|
+        @new_notification = NewNotification.create! user: u,
+                            content: "#{@freechat.id}번 자유채팅에 #{u.email}님이 참가했습니다",
+                            link: "/freechats/show/#{params[:id]}"
+      end
+      flash[:success] = "#{user.email}님이 채팅방에 추가되었습니다"
+      redirect_to "/freechats/show/#{params[:id]}"
+    else
+      flash[:error] = "#{user.email}님은 초대거부 상태입니다"
+      redirect_to "/freechats/index"
     end
-    flash[:success] = "#{user.email}님이 채팅방에 추가되었습니다"
-    redirect_to "/freechats/show/#{params[:id]}"
   end
   
   def out
@@ -46,6 +52,8 @@ class FreechatsController < ApplicationController
                           link: "/freechats/index"
     end
     @freechat.users.delete(current_user)
+    # 초대거부 상태 등록
+    @freechat.rejected_users << current_user
     # 만약에 멤버가 한명도 없으면 이 채팅방 삭제되어야함
     if @freechat.users.count == 0
       @freechat.destroy
