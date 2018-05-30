@@ -1,7 +1,4 @@
 Rails.application.routes.draw do
-  get 'users/index'
-  get 'users/show'
-  get 'users/find'
   devise_for :users
   root 'welcome#index'
   
@@ -78,5 +75,9 @@ Rails.application.routes.draw do
   get '/chatroom/index' => 'chatrooms#index'
   get '/chatroom/show/:id' => 'chatrooms#show'
   get 'chatroom/destroy/:id' => 'chatrooms#destroy'
-
+  
+  get '/freechats/index' => 'freechats#index'
+  get '/freechats/new' => 'freechats#new'
+  get '/freechats/show/:id' => 'freechats#show'
+  post '/freechats/create' => 'freechats#create'
 end

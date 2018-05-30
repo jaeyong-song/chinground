@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_28_030603) do
+ActiveRecord::Schema.define(version: 2018_05_30_033723) do
 
   create_table "article_users", force: :cascade do |t|
     t.integer "article_id"
@@ -66,6 +66,31 @@ ActiveRecord::Schema.define(version: 2018_05_28_030603) do
     t.datetime "updated_at", null: false
     t.index ["followee_id"], name: "index_follows_on_followee_id"
     t.index ["follower_id"], name: "index_follows_on_follower_id"
+  end
+
+  create_table "free_messages", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "freechat_id"
+    t.text "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["freechat_id"], name: "index_free_messages_on_freechat_id"
+    t.index ["user_id"], name: "index_free_messages_on_user_id"
+  end
+
+  create_table "freechat_users", force: :cascade do |t|
+    t.integer "freechat_id"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["freechat_id"], name: "index_freechat_users_on_freechat_id"
+    t.index ["user_id"], name: "index_freechat_users_on_user_id"
+  end
+
+  create_table "freechats", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "messages", force: :cascade do |t|

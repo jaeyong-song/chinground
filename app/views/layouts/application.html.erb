@@ -39,8 +39,12 @@
             <!--나의 모임에서 종합 관리-->
             <a class="nav-link" href="/myground" style="color:white;">나의 모임</a>
             </li>
-            <li class="nav-item <%= 'active' if request.original_fullpath == '/chatroom/show' %>">
-            <a class="nav-link" href="/chatroom/index" style="color:white;">채팅</a>
+            <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="dropdown1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="color:white;">채팅</a>
+            <div class="dropdown-menu" aria-labelledby="dropdown1">
+                <a class="dropdown-item" href="/chatroom/index">게시물 채팅</a>
+                <a class="dropdown-item" href="/freechats/index">자유채팅</a>
+            </div>
             </li>
             <li class="nav-item <%= 'active' if request.original_fullpath == '/rating' %>">
             <a class="nav-link" href="/rating" style="color:white;">별점</a>

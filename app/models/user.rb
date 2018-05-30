@@ -19,6 +19,10 @@ class User < ApplicationRecord
   has_many :messages
   has_many :chatrooms, through: :chatroom_users
   
+  has_many :freechat_users, dependent: :destroy
+  has_many :free_messages # 사람이 탈퇴해도 메시지는 남아있어요
+  has_many :freechats, through: :freechat_users
+  
   has_many :followee_follows, foreign_key: :follower_id, class_name: "Follow"
   has_many :followees, through: :followee_follows, source: :followee
   
