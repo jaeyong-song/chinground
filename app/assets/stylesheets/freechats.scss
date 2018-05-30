@@ -1,3 +1,21 @@
 // Place all the styles related to the freechats controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.title{
+    float:left;
+    margin-bottom: 30px;
+}
+.btn.submit{
+    float:right;
+}
+table{
+    text-align:center;
+}
+table tr td a {
+    display:block;
+    height:100%;
+    width:100%;
+}
+#freechat_title{
+    width:75%;
+}

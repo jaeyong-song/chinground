@@ -22,3 +22,5 @@ Rails.application.config.assets.precompile += %w( article.css )
 Rails.application.config.assets.precompile += %w( rating.css )
 # chatrooms-css
 Rails.application.config.assets.precompile += %w( chatrooms.css )
+# freechat-css
+Rails.application.config.assets.precompile += %w( freechats.css )
