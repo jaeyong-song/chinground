@@ -74,10 +74,8 @@ class RatingController < ApplicationController
       my_joins = []
       @articleusers = ArticleUser.all
       @articleusers.each do |articleuser|
-          if articleuser.user_id == user
-            if Article.find(articleuser.article_id).active == true
-              my_joins << articleuser.article_id
-            end
+          if articleuser.user_id == user.id
+            my_joins << articleuser.article_id
           end
       end
       return my_joins.uniq
