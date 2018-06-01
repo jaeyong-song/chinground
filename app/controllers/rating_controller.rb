@@ -68,6 +68,21 @@ class RatingController < ApplicationController
       end
       return my_joins.uniq
   end
+  
+  # 내가 참여하고 있는 게시물 찾기
+  def self.find_my_joining(user)
+      my_joins = []
+      @articleusers = ArticleUser.all
+      @articleusers.each do |articleuser|
+          if articleuser.user_id == user
+            if Article.find(articleuser.article_id).active == true
+              my_joins << articleuser.article_id
+            end
+          end
+      end
+      return my_joins.uniq
+  end
+  
   # 사용자 평균 별점 계산 코드
   def self.avg_rating(user)
       @ratings = Rating.all

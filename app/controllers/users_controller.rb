@@ -7,7 +7,7 @@ class UsersController < ApplicationController
 
   # GET users/show/:id
   def show
-    @joined_ids = RatingController.find_my_joined(@user)
+    @joined_ids = RatingController.find_my_joining(@user)
     @joined = []
     @joined_ids.each do |id|
       @joined << Article.find(id)
@@ -50,7 +50,7 @@ class UsersController < ApplicationController
   
   def myprofile
     @user = current_user
-    @joined_ids = RatingController.find_my_joined(current_user)
+    @joined_ids = RatingController.find_my_joining(current_user)
     @joined = []
     @joined_ids.each do |id|
       @joined << Article.find(id)
