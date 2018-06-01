@@ -7,4 +7,4 @@ $(document).on 'keypress', '[data-behavior~=chatroom_speaker]', (event) ->
         App.chatroom.speak event.target.value
         event.target.value = ''
         event.preventDefault()
-        setTimeout(document.location.reload(), 1000)
+        setTimeout ( ->  document.location.reload()), 500
