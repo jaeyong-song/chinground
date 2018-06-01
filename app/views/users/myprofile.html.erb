@@ -1,23 +1,43 @@
-<%= stylesheet_link_tag "users" %>
-
-<h3>나의 프로필 페이지입니다</h3>
-
-<h3>친구(팔로우)</h3>
-
-<% @user.followers.each do |user|%>
-    <p><%= user.email %></p>
-<% end %>
-
-<h3>친구(팔로워)</h3>
-
-<% @user.followees.each do |user|%>
-    <p><%= user.email %></p>
-<% end %>
-
-<div class="table-area">
-    <h3>참여한 게시물 내역</h3>
-    
-    <table class="table table-hover">
+<%= stylesheet_link_tag "show" %>
+<div class="main">
+    <div class="title_email"> 
+        <h3>나의 프로필 페이지입니다</h3>
+    </div>
+     <div id="table_followers">
+        <table class="table">
+            <th class="table_color">
+                <h3>친구(팔로우)</h3>
+            </th>
+            <div class="table_ov">
+                <% @user.followers.each do |user|%>
+                    <tr class="table_list">
+                        <td>
+                            <%= user.email %>
+                        </td>
+                    </tr>
+                <% end %>
+            </div>
+        </table>
+    </div>
+        <div  id="table_followees">
+            <table class="table">
+                <th class="table_color">
+                    <h3>친구(팔로워)</h3>
+                </th>
+                <div class="table_ov">
+                    <% @user.followees.each do |user|%>
+                        <tr class="table_list">
+                        <td>
+                            <%= user.email %>
+                        </td>
+                    <% end %>
+                </div>
+            </table>
+        </div>
+    <div class="title_1">
+        <h3>참여한 게시물 내역</h3>
+    </div>
+    <table class="table">
         <thead class="thead-light">
             <tr><th scope="col" class="ground_list">번호</th>
                 <th scope="col" class="ground_list">제목</th>
