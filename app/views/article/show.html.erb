@@ -1,33 +1,33 @@
-<h3>제목 : <%= @article.title %></h3>
-
-<h3>장소 : <%= @article.place %></h3>
-
-<h4>작성자 : <%= @user.email %></h4>
-
-<p>내용 : <%= @article.content %></p>
-
-<p>시작시간 : <%= @article.init_time %></p>
-
-<p>종료시간 : <%= @article.fin_time %></p>
+<%= stylesheet_link_tag "article" %>
+<div class="article_info">
+  <h1><%= @article.title %></h1>
+  <h2><%= @article.place %></h2>
+  <h3><%= @user.email %></h3>
+  <p><%= @article.content %></p>
+  <p class="time"><%= @article.fin_time %></p>
+  <p class="time"> ~ </p>
+  <p class="time"><%= @article.init_time %></p>
+  <div class="rclear"></div>
+</div>
 
 <!--만약 아직 완료된 게시물이 아닌 경우에만 보여줘야함.-->
 <% if @article.active == true %>
-  
+<div class="article_user">
   <p>현재 참여한 사람: </p>
-  <p><% @participants.each do |participant| %>
+  <span><% @participants.each do |participant| %>
   <%= participant.email %>, 별점: <%= RatingController.avg_rating(participant.id) %> | 
   <!-- 강제 참가취소 기능은 게시물 작성자만 가능하도록 만들 것!-->
     <% if @user == current_user %>
-      <form action="/article/out/<%= @article.id %>" method="post" class="form-group">
+      <form action="/article/out/<%= @article.id %>" method="post" class="form-group" id="btn-reject">
         <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
         <input type="hidden" value="<%= participant.id %>" name="user_id" class="form-control">
         <button type="submit" class="btn">강퇴</button>
       </form>
     <% end %>
-  <% end %></p>
-  <p>강퇴는 게시물 권한자만 가능합니다</p>
+  <% end %></span>
+  <p id="msg-reject">강퇴는 게시물 권한자만 가능합니다</p>
+</div>
   
-
   <!-- 참가 기능 추가 / 참고로, 본인인 경우에는 게시물 작성 시 자동으로 참가 되도록 만들어야함.-->
   <% if (@user.id != current_user.id) && (@participants & [current_user] != [current_user]) %>
   <form action="/article/participate/<%= @article.id %>" method="post">
@@ -40,6 +40,7 @@
   </form>
   <% end %>
   
+<div class="article_btn">
   <!-- 취소 기능 추가 -->
   <% if @participants & [current_user] == [current_user] %>
   <form action="/article/participate_cancel/<%= @article.id %>" method="post">
@@ -52,7 +53,7 @@
       <input type="hidden" name="user_id" class="form-control" value="<%= current_user.id %>">
       <input type="hidden" name="article_id" class="form-control" value="<%= @article.id %>">
     </div>
-    <button type="submit" class="btn btn-primary">참가취소</button>
+    <button type="submit" class="btn">참가취소</button>
   </form>
   <% end %>
   
@@ -69,18 +70,18 @@
   <% else %>
     <p>채팅방은 게시물 권한자만 개설 및 삭제할 수 있습니다.</p>
   <% end %>
-  
-  <hr>
+</div>
+<div class="lclear"></div>
+<div class="link">  
   <!-- 만약 모임이 아직 끝나지 않았다면 -->
   <%= link_to '모임완료', "/article/complete/#{@article.id}", data: { confirm: "모임이 끝나셨나요? 확인 버튼을 누르시면 모임이 끝나고 마이페이지에서 평가하시면 됩니다" } %>
-<% elsif %>
-  <hr>
-  <p>완료된 모임입니다</p>
-  <hr>
-<% end %>
+  <% elsif %>
+    <p>완료된 모임입니다</p>
+  <% end %>
 <%= link_to 'index 이동', '/article' %>
 <%= link_to '수정', "/article/edit/#{@article.id}" %>
 <%= link_to '삭제', "/article/destroy/#{@article.id}", data: { confirm: "삭제하시겠습니까?" } %>
+</div>
 
 <hr>
 <!--여기서부터 댓글 기능 추가-->
