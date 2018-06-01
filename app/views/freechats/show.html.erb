@@ -2,25 +2,27 @@
 
 <!-- 이 div가 채팅룸 켜주기 때문에 삭제하면 안됨-->
 <div id="freechat_chk"></div>
-
-<h3><%= @freechat.name %></h3>
-<hr>
-<h5>자유 채팅방입니다</h5>
-
-<%= button_to '친구추가', "/freechats/new_users/#{@freechat.id}", class:"btn submit", :method => :get %>
-<%= button_to '나가기', "/freechats/out/#{@freechat.id}", class:"btn submit", :method => :get %>
-<p>나가기 시 자동으로 초대거부 상태가 됩니다^^</p>
-
-<div class="joined_list">
-<h3>현재 참여자</h3>
-  <ul>
-  <% @freechat.users.each do |user| %>  
-    <li><%= user.email %></li>
-  <% end %>
-  </ul>
+<div class="chat_side" id="join_chat">
+    
+  <h3><%= @freechat.name %></h3>
+  <hr>
+  <h5>자유 채팅방입니다</h5>
+  
+  <%= button_to '친구추가', "/freechats/new_users/#{@freechat.id}", class:"btn submit", :method => :get %>
+  <%= button_to '나가기', "/freechats/out/#{@freechat.id}", class:"btn submit", :method => :get %>
+  <p>나가기 시 자동으로 초대거부 상태가 됩니다^^</p>
+  
+  <div class="chat_list">
+  <h3 class="list_color">현재 참여자</h3>
+    <ul class="list_ground">
+    <% @freechat.users.each do |user| %>  
+      <li><%= user.email %></li>
+    <% end %>
+    </ul>
+  </div>
 </div>
 
-<hr>
+
 <div id="chat_area">
   <ul id="messages">
     <% @freechat.free_messages.each do |message| %>
@@ -32,9 +34,11 @@
     <% end %>
   </ul>
 </div>
-<form id="msg_ipt">
-  <input type="text" data-behavior="freechat_speaker" placeholder="입력은 Enter">
-</form>
+<div class="chat_set">
+  <form id="msg_ipt">
+    <input type="text" data-behavior="freechat_speaker" placeholder="입력은 Enter">
+  </form>
+</div>
 
 <script>
   $( document ).ready(function(){
