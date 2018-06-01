@@ -1,0 +1,137 @@
+.title{
+    font-size: 2em !important;
+    float:left;
+    margin: 10px 0;
+}
+.write_btn{
+    float: right;
+    margin: 10px 0;
+    background-color: rgb(136, 176, 75);
+    color: WHITE;
+}
+
+#grid{
+    clear: both;
+    text-align: center;
+    overflow-y: scroll;
+}
+::-webkit-scrollbar {
+    display: none;
+}
+
+.article-area{
+    width: 90% !important;
+    background-color: white !important;
+    border:2px dashed rgba(136, 176, 75, 0.6) !important;
+    border-radius: 15px !important;
+    padding:0 !important;
+    margin-bottom: 10px !important;
+}
+.article-title{
+    margin:0;
+    font-size: 1.5em;
+    background-color: rgba(136, 176, 75, 0.6);
+    border-radius: 15px 15px 0 0;
+}
+.article-place{
+    font-size: 1.2em !important;
+}
+.article-date{
+    font-style: italic !important;
+    float: right;
+    margin-right: 20px;
+}
+
+.square-box{
+    position: relative;
+    left: 10%;
+    width: 80%;
+    height: 75%;
+    min-width: 500px;
+    background-color: #CEFBC9;
+    content: "";
+    display: block;
+    padding: 5%;
+}
+#title-div{
+    float: left;
+}
+#place-div{
+    clear: left;
+    float: left;
+}
+#content{
+    clear: left;
+    width: 100%;
+    height: 230px;
+}
+#time-div{
+    float: right;    
+}
+
+#init_time{
+    margin-bottom: 10px;
+}
+
+table { text-align:center; }
+.table-title { 
+    text-align : center;
+    margin-top:25px;
+    margin-bottom:10px;
+}
+.table-title>h2 { font-size: 1.5em; }
+.table-area .table.table-hover {
+    border: 2px dashed rgba(136, 176, 75, 0.5) !important;
+    border-collapse: separate;
+    border-radius:15px;
+    border-spacing:0;
+}
+.table-area .table.table-hover th:first-child {
+    border-radius: 15px 0 0 0;
+}
+.table-area .table.table-hover th:last-child {
+    border-radius: 0 15px 0 0;
+}
+
+.ground_list{
+    width:20%;
+}
+
+table tr td a {
+    display:block;
+    height:100%;
+    width:100%;
+}
+table tr td a:link { color:black; text-decoration:none; }
+table tr td a:hover { color:black; text-decoration:none; }
+table tr td a:visited { color:black; text-decoration:none; }
+
+#group_bg {
+    width:80%;
+    background-color: rgba(136, 176, 75, 0.6);
+    margin-bottom: 30px;
+    padding: 30px 30px 120px 30px;
+   
+}
+.btn.btn-light{
+    background-color: rgba(136, 176, 75, 0.6) !important;
+    float: right;
+    margin: 0 200px 0px 0;
+    
+    
+}
+
+.bj{
+    clear:right;
+}
+.title_border{
+    color: white;
+    font-family: 고딕;
+    border-radius: 7px ;
+    padding: 12px!important;
+    background-color: rgba(136, 176, 75, 0.6) ;
+}
+.title-h1{
+
+    margin: 30px 0 !important;
+}

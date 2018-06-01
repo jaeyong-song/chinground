@@ -1,43 +1,67 @@
-<h3>나의 프로필 페이지입니다</h3>
-
-<h3>친구(팔로우)</h3>
-
-<% @user.followers.each do |user|%>
-    <p><%= user.email %></p>
-<% end %>
-
-<h3>친구(팔로워)</h3>
-
-<% @user.followees.each do |user|%>
-    <p><%= user.email %></p>
-<% end %>
-
-
-<h3>참여한 게시물 내역</h3>
-
-<table class="table table-hover">
-    <thead class="thead-light">
-        <tr><th scope="col" class="ground_list">번호</th>
-            <th scope="col" class="ground_list">제목</th>
-            <th scope="col" class="ground_list">장소</th>
-            <th scope="col" class="ground_list">작성자</th>
-        </tr>
-    </thead>
-    <tbody>
-    <% @joined.each do |article| %>
-        <tr>
-            <% if article.active %>
-                <td scope="row" class="active_list"><%= link_to article.id, "/article/show/#{article.id}" %></td>
-                <td  class="active_list"><%= link_to article.title, "/article/show/#{article.id}" %></td>
-                <td  class="active_list"><%= link_to article.place, "/article/show/#{article.id}" %></td>
-                <td  class="active_list"><%= link_to article.user.email, "/article/show/#{article.id}" %></td>
-            <% else %>
-                <td scope="row" class="done_list"><%= link_to article.id, "/article/show/#{article.id}" %></td>
-                <td class="done_list"><%= link_to article.title, "/article/show/#{article.id}" %></td>
-                <td class="done_list"><%= link_to article.place, "/article/show/#{article.id}" %></td>
-                <td class="done_list"><%= link_to article.user.email, "/article/show/#{article.id}" %></td>
-            <% end %>
-        </tr>
-    <% end %>
-    </tbody>
-</table>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+<%= stylesheet_link_tag "show" %>
+<div class="main">
+    <div class="title_email"> 
+        <h3>나의 프로필 페이지입니다</h3>
+    </div>
+     <div id="table_followers">
+        <table class="table">
+            <th class="table_color">
+                <h3>친구(팔로우)</h3>
+            </th>
+            <div class="table_ov">
+                <% @user.followers.each do |user|%>
+                    <tr class="table_list">
+                        <td>
+                            <%= user.email %>
+                        </td>
+                    </tr>
+                <% end %>
+            </div>
+        </table>
+    </div>
+        <div  id="table_followees">
+            <table class="table">
+                <th class="table_color">
+                    <h3>친구(팔로워)</h3>
+                </th>
+                <div class="table_ov">
+                    <% @user.followees.each do |user|%>
+                        <tr class="table_list">
+                        <td>
+                            <%= user.email %>
+                        </td>
+                    <% end %>
+                </div>
+            </table>
+        </div>
+    <div class="title_1">
+        <h3>참여한 게시물 내역</h3>
+    </div>
+    <table class="table">
+        <thead class="thead-light">
+            <tr><th scope="col" class="ground_list">번호</th>
+                <th scope="col" class="ground_list">제목</th>
+                <th scope="col" class="ground_list">장소</th>
+                <th scope="col" class="ground_list">작성자</th>
+            </tr>
+        </thead>
+        <tbody>
+        <% @joined.each do |article| %>
+            <tr>
+                <% if article.active %>
+                    <td scope="row" class="active_list"><%= link_to article.id, "/article/show/#{article.id}" %></td>
+                    <td  class="active_list"><%= link_to article.title, "/article/show/#{article.id}" %></td>
+                    <td  class="active_list"><%= link_to article.place, "/article/show/#{article.id}" %></td>
+                    <td  class="active_list"><%= link_to article.user.email, "/article/show/#{article.id}" %></td>
+                <% else %>
+                    <td scope="row" class="done_list"><%= link_to article.id, "/article/show/#{article.id}" %></td>
+                    <td class="done_list"><%= link_to article.title, "/article/show/#{article.id}" %></td>
+                    <td class="done_list"><%= link_to article.place, "/article/show/#{article.id}" %></td>
+                    <td class="done_list"><%= link_to article.user.email, "/article/show/#{article.id}" %></td>
+                <% end %>
+            </tr>
+        <% end %>
+        
+    </table>
+</div>

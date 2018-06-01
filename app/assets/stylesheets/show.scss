@@ -1,0 +1,42 @@
+.main{
+    font-family: 고딕;
+    background-color: white;
+    padding: 5px 7px 200px 7px ;
+    border: 5px solid rgba(136, 176, 75, 0.6);
+    border-radius: 15px;
+}
+#table_followers{
+    background-color:white;
+    float: left;
+    //border: 1px solid black;
+    width:49%;
+    //height: 40%;
+}
+#table_followees{
+    background-color:white;
+    float: right;
+   // border: 1px solid black;
+    width:49%;
+    //height: 40%;
+}
+.title_1{
+    margin: 100px 0 0 0;
+    text-align:left;
+}
+.table_color{
+    background-color:rgba(136, 176, 75, 0.6);
+}
+.color_white{
+    background-color:white;
+}
+.title_email{
+    margin: 10px 0 0 0;
+    background-color:white;
+    padding: 5px 5px;
+}
+.table_list{
+    background-color: #e9ecef;
+}
+.table_ov{
+    overflow-y: scroll;
+}
