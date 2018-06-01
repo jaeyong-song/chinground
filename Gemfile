@@ -5,7 +5,8 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-
+#figaro
+gem 'figaro'
 
 #rails db visualize
 gem 'rails_db'
