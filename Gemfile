@@ -25,6 +25,9 @@ gem 'ransack'
 #notice helper
 gem 'unread'
 
+# actioncable redis
+gem 'redis'
+
 #view sented email - in devel
 gem 'letter_opener', group: :development
 
