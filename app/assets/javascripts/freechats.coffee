@@ -7,4 +7,4 @@ $(document).on 'keypress', '[data-behavior~=freechat_speaker]', (event) ->
         App.freechat.speak event.target.value
         event.target.value = ''
         event.preventDefault()
-        setTimeout ( ->  document.location.reload()), 500
+        # setTimeout ( ->  document.location.reload()), 500
