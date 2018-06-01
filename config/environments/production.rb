@@ -1,13 +1,14 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
   
+  config.action_mailer.delivery_method = :ses
   config.action_mailer.default_url_options = {:host => 'http://13.125.230.211'}
-  config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = {
-    :address => "email-smtp.us-east-1.amazonaws.com",
-    :user_name => 'AKIAIACK3KZX7F7GECFA',
-    :password => 'AlkUk112Ugtrji6hiIHXgWZo7TGngXCLyevwnD2L7Wuc'
-  }
+  # config.action_mailer.delivery_method = :smtp
+  # config.action_mailer.smtp_settings = {
+  #   :address => "email-smtp.us-east-1.amazonaws.com",
+  #   :user_name => 'AKIAIACK3KZX7F7GECFA',
+  #   :password => 'AlkUk112Ugtrji6hiIHXgWZo7TGngXCLyevwnD2L7Wuc'
+  # }
   
   config.action_mailer.raise_delivery_errors = true
 
