@@ -2,7 +2,7 @@ Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
   
   config.action_mailer.delivery_method = :ses
-  config.action_mailer.default_url_options = {:host => 'http://13.125.197.177'}
+  config.action_mailer.default_url_options = {:host => 'http://13.125.59.166'}
   # config.action_mailer.delivery_method = :smtp
   # config.action_mailer.smtp_settings = {
   #   :address => "email-smtp.us-east-1.amazonaws.com",
@@ -53,7 +53,7 @@ Rails.application.configure do
   # Mount Action Cable outside main process or domain
   # config.action_cable.mount_path = nil
   # config.action_cable.url = 'wss://example.com/cable'
-  config.action_cable.allowed_request_origins = [ 'http://13.125.197.177/' ]
+  config.action_cable.allowed_request_origins = [ 'http://13.125.59.166' ]
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   # config.force_ssl = true
