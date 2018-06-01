@@ -4,10 +4,12 @@ Rails.application.configure do
   config.action_mailer.default_url_options = {:host => 'http://13.125.230.211'}
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    :address => "127.0.0.1",
-    :port    => 25,
-    :domain  => 'http://13.125.230.211'
+    :address => "email-smtp.us-east-1.amazonaws.com",
+    :user_name => 'AKIAIACK3KZX7F7GECFA',
+    :password => 'AlkUk112Ugtrji6hiIHXgWZo7TGngXCLyevwnD2L7Wuc'
   }
+  
+  config.action_mailer.raise_delivery_errors = true
 
   # Code is not reloaded between requests.
   config.cache_classes = true
