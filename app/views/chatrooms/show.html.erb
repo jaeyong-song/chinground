@@ -2,43 +2,47 @@
 
 <!-- 이 div가 채팅룸 켜주기 때문에 삭제하면 안됨-->
 <div id="chatroom_chk"></div>
-
-<h3><%= @chatroom.name %></h3>
-<hr>
-<h5><%= @chatroom.article.title %>의 채팅방입니다</h5>
-
-<div class="joined_list">
-<h3>현재 참여자</h3>
-  <ul>
-  <% @chatroom.users.each do |user| %>  
-    <li><%= user.email %></li>
-  <% end %>
-  </ul>
-</div>
-
-<hr>
-<div id="chat_area">
-  <ul id="messages">
-    <% @chatroom.messages.each do |message| %>
-      <% if message.user == current_user %>
-        <li class="my_msg"><%= message.content %></li>
-      <% else %>
-        <li class="others_msg"><%= message.user.email %><br><%= message.content %></li>
-      <% end %>
+<div class="chat_side">
+  
+  <h3 class="side_color"><%= @chatroom.name %></h3>
+  <hr>
+  <h5><%= @chatroom.article.title %>의 채팅방입니다</h5>
+  
+  <div class="chat_list">
+    
+  <h3 class="list_color">현재 참여자</h3>
+    <ul class="list_ground">
+    <% @chatroom.users.each do |user| %>  
+      <li><%= user.email %></li>
     <% end %>
-  </ul>
+    </ul>
+  </div>
 </div>
-<form id="msg_ipt">
-  <input type="text" data-behavior="chatroom_speaker" placeholder="입력은 Enter">
-</form>
 
-<script>
-  $( document ).ready(function(){
-    if (self.name != 'reload') {
-      self.name = 'reload';
-      self.location.reload(true);
-    }
-    else self.name = ''; 
-    $("#chat_area").scrollTop($("#chat_area")[0].scrollHeight);
-  });
-</script>
+  <div id="chat_area">
+    <ul id="messages">
+      <% @chatroom.messages.each do |message| %>
+        <% if message.user == current_user %>
+          <li class="my_msg"><%= message.content %></li>
+        <% else %>
+          <li class="others_msg"><%= message.user.email %><br><%= message.content %></li>
+        <% end %>
+      <% end %>
+    </ul>
+  </div>
+  <div class="chat_set">
+    <form id="msg_ipt">
+      <input type="text" data-behavior="chatroom_speaker" placeholder="입력은 Enter">
+    </form>
+  </div>
+  
+  <script>
+    $( document ).ready(function(){
+      if (self.name != 'reload') {
+        self.name = 'reload';
+        self.location.reload(true);
+      }
+      else self.name = ''; 
+      $("#chat_area").scrollTop($("#chat_area")[0].scrollHeight);
+    });
+  </script>
