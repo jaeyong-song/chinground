@@ -9,6 +9,7 @@ class User < ApplicationRecord
   has_many :messages, dependent: :destroy
   has_many :ratings, dependent: :destroy
   has_many :article_users, dependent: :destroy
+  has_many :joined_articles, through: :article_users, source: :article
   has_many :comments
   acts_as_reader
   has_many :new_notifications
@@ -19,11 +20,23 @@ class User < ApplicationRecord
   has_many :messages
   has_many :chatrooms, through: :chatroom_users
   
+  has_many :freechat_users, dependent: :destroy
+  has_many :free_messages # 사람이 탈퇴해도 메시지는 남아있어요
+  has_many :freechats, through: :freechat_users
+  
   has_many :followee_follows, foreign_key: :follower_id, class_name: "Follow"
   has_many :followees, through: :followee_follows, source: :followee
   
   has_many :follower_follows, foreign_key: :followee_id, class_name: "Follow"
   has_many :followers, through: :follower_follows, source: :follower
+  
+  # 초대 거부 구현(자유 채팅방)
+  has_many :reject_freechats, dependent: :destroy
+  has_many :rejected_freechats, through: :reject_freechats, source: :freechat
+  
+  # 게시물 밴 구현
+  has_many :ban_articles, dependent: :destroy
+  has_many :banned_articles, through: :ban_articles, source: :article
   
   def toggle_follow(user)
     if self == user

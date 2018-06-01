@@ -39,8 +39,12 @@
             <!--나의 모임에서 종합 관리-->
             <a class="nav-link" href="/myground" style="color:white;">나의 모임</a>
             </li>
-            <li class="nav-item <%= 'active' if request.original_fullpath == '/chatroom/show' %>">
-            <a class="nav-link" href="/chatroom/index" style="color:white;">채팅</a>
+            <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="dropdown1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="color:white;">채팅</a>
+            <div class="dropdown-menu" aria-labelledby="dropdown1">
+                <a class="dropdown-item" href="/chatroom/index">게시물 채팅</a>
+                <a class="dropdown-item" href="/freechats/index">자유채팅</a>
+            </div>
             </li>
             <li class="nav-item <%= 'active' if request.original_fullpath == '/rating' %>">
             <a class="nav-link" href="/rating" style="color:white;">별점</a>
@@ -125,6 +129,23 @@
                     <td style="color:white; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;"><%= temp.place %></td>
                 </tr></a>
                 <% end %>
+            <% end %>
+            </tbody>
+          </table>
+          <p>나의 자유 채팅방 목록</p>
+          <table class="table table-hover" style="font-size: 12px;">
+            <thead>
+              <tr>
+                <th scope="col">번호</th>
+                <th scope="col">제목</th>
+              </tr>
+            </thead>
+            <tbody>
+            <% current_user.freechats.each do |freechat| %>
+                <a href="/freechats/show/<%= freechat.id %>"><tr>
+                    <td scope="row"><%= freechat.id %></td>
+                    <td style="color:white; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;"><%= link_to "#{freechat.name}", "/freechats/show/#{freechat.id}", style: 'color:white; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;' %></td>
+                </tr></a>
             <% end %>
             </tbody>
           </table>

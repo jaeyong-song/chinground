@@ -1,7 +1,4 @@
 Rails.application.routes.draw do
-  get 'users/index'
-  get 'users/show'
-  get 'users/find'
   devise_for :users
   root 'welcome#index'
   
@@ -38,6 +35,9 @@ Rails.application.routes.draw do
   #검색
   post '/article/search' => 'article#search'
   get '/article/search' => 'article#search'
+  
+  # 강퇴관련
+  post '/article/out/:id' => 'article#out'
   # =========================================
   
   # 댓글 관련
@@ -78,5 +78,12 @@ Rails.application.routes.draw do
   get '/chatroom/index' => 'chatrooms#index'
   get '/chatroom/show/:id' => 'chatrooms#show'
   get 'chatroom/destroy/:id' => 'chatrooms#destroy'
-
+  
+  get '/freechats/index' => 'freechats#index'
+  get '/freechats/new' => 'freechats#new'
+  get '/freechats/show/:id' => 'freechats#show'
+  post '/freechats/create' => 'freechats#create'
+  get '/freechats/new_users/:id' => 'freechats#new_users'
+  post '/freechats/add_users/:id' => 'freechats#add_users'
+  get '/freechats/out/:id' => 'freechats#out'
 end

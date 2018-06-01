@@ -1,35 +1,41 @@
+<%= stylesheet_link_tag "users" %>
 <!--[TODO] 나중에 user에 이름 콜룸 추가하고 수정할 것!!-->
-
-<%= search_form_for @search, url: '/users/search', class: "form-group" do |f| %>
+<div class="table-area">
+  <div class="table-title"><h1>나의 친구를 찾아봅시다</h1></div>
+<%= search_form_for @search, url: '/users/search', class: "input-group mb-3" do |f| %>
     <%= f.text_field :email_cont, class: "form-control", placeholder: "email...", autofocus: true %>
-    <%= f.submit "검색", class: "btn" %>
+    <div class="input-group-append">
+      <%= f.submit "검색", class: "btn btn-outline-secondary" %>
+    </div>
 <% end %>
 <p>검색 결과를 보시려면 '검색'을 클릭해주세요^^</p>
 
-<table class="table table-hover">
-  <thead>
-    <tr>
-      <th scope="col">번호</th></th>
-      <th scope="col">email</th>
-      <th scope="col">팔로잉?</th>
-      <th scope="col">follow</th>
-      <th scope="col">프로필 보기</th>
-      <!--이것도 추후 수정 필요!!-->
-    </tr>
-  </thead>
-  <tbody>
-    <% @users.each do |user| %>
-    <tr>
-      <th scope="row"><%= user.id %></th>
-      <td><%= user.email %></td>
-      <td><%= current_user.followers.include?(user) ? "YES" : "NO" %></td>
-      <% if current_user.followers.include?(user) %>
-      <td><%= link_to '팔로우끊기', "/users/follow/#{user.id}", method: :post %></td>
-      <% else %>
-      <td><%= link_to '팔로우하기', "/users/follow/#{user.id}", method: :post %></td>
+
+  <table class="table table-hover">
+    <thead class="thead-light">
+      <tr>
+        <th scope="col" class="ground_list">번호</th></th>
+        <th scope="col" class="ground_list">email</th>
+        <th scope="col" class="ground_list">팔로잉?</th>
+        <th scope="col" class="ground_list">follow</th>
+        <th scope="col" class="ground_list">보기</th>
+        <!--이것도 추후 수정 필요!!-->
+      </tr>
+    </thead>
+    <tbody>
+      <% @users.each do |user| %>
+      <tr>
+        <th scope="row"><%= user.id %></th>
+        <td><%= user.email %></td>
+        <td><%= current_user.followers.include?(user) ? "YES" : "NO" %></td>
+        <% if current_user.followers.include?(user) %>
+        <td><%= link_to '팔로우끊기', "/users/follow/#{user.id}", method: :post %></td>
+        <% else %>
+        <td><%= link_to '팔로우하기', "/users/follow/#{user.id}", method: :post %></td>
+        <% end %>
+        <td><%= link_to '프로필 보기', "/users/show/#{user.id}" %></td>
+      </tr>
       <% end %>
-      <td><%= link_to '프로필 보기', "/users/show/#{user.id}" %></td>
-    </tr>
-    <% end %>
-  </tbody>
-</table>
+    </tbody>
+  </table>
+</div>

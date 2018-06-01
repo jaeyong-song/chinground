@@ -1,0 +1,2 @@
+module FreechatsHelper
+end

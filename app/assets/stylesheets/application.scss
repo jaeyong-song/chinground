@@ -8,22 +8,22 @@
 @font-face{
     font-family: 'SpoqaHanSans-Regular';
     src: local('SpoqaHanSans-Regular'),
-        url('Spoqa Han Sans Regular.woff') format('woff');
+        font-url('SpoqaHanSansRegular.woff') format('woff');
 }
 @font-face{
     font-family: 'SpoqaHanSans-Light';
     src: local('SpoqaHanSans-Light'),
-        url('Spoqa Han Sans Light.woff') format('woff');
+        font-url('SpoqaHanSansLight.woff') format('woff');
 }
 @font-face{
     font-family: 'SpoqaHanSans-Thin';
     src: local('SpoqaHanSans-Thin'),
-        url('Spoqa Han Sans Thin.woff') format('woff');
+        font-url('SpoqaHanSansThin.woff') format('woff');
 }
 @font-face{
     font-family: 'SpoqaHanSans-Bold';
     src: local('SpoqaHanSans-Bold'),
-        url('Spoqa Han Sans Bold.woff') format('woff');
+        font-url('SpoqaHanSansBold.woff') format('woff');
 }
 /* Sticky footer styles
 -------------------------------------------------- */
@@ -122,6 +122,8 @@ a:visited {
     float:right;
     text-align: center;
     margin: 60px 10px 10px 10px;
+    max-height: 80%;
+    padding-top: 20px;
 }
 .my_info h5,h6{
     color : WHITE

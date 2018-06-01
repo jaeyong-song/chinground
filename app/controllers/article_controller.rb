@@ -1,6 +1,6 @@
 class ArticleController < ApplicationController
   before_action :authenticate_user!
-  before_action :find_params, only: [:show, :edit, :destroy, :complete, :participate,:participate_cancel]
+  before_action :find_params, only: [:show, :edit, :destroy, :complete, :participate, :participate_cancel, :out]
   before_action :match_user, only: [:edit, :destroy, :complete]
   # 글 수정 및 삭제 시 자신의 글이 아니면 삭제 및 수정이 되지 않도록.
   # [OPTIMIZE] 현재 임시로 만들어 놓았고 문제 없나 확인해야함.
@@ -104,33 +104,38 @@ class ArticleController < ApplicationController
   
   # user들이 게시물에 참여할 수 있도록 하는 메소드
   def participate
-    # 참여자들에게 새로운 참여자가 있음을 알려주는 메소드
-    users_list = ArticleUser.where(article_id: params[:id].to_i) #user_list에 현재 article에 해당되는 사람 목록 저장
-    # 참고로 아직은 신규 참가자에게 알림이 뜨지 않았음 -> 신규 참가자에게는 ~~에 새로 참가했습니다...로 따로 알림
-    users = [] # 실제 참가한 사람 id만 저장할 배열
-    users_list.each do |articleuser|
-    users << articleuser.user_id
+    # 만약에 밴 당해있지 않다면
+    unless @article.banned_users.include?(current_user)
+      # 참여자들에게 새로운 참여자가 있음을 알려주는 메소드
+      users_list = ArticleUser.where(article_id: params[:id].to_i) #user_list에 현재 article에 해당되는 사람 목록 저장
+      # 참고로 아직은 신규 참가자에게 알림이 뜨지 않았음 -> 신규 참가자에게는 ~~에 새로 참가했습니다...로 따로 알림
+      users = [] # 실제 참가한 사람 id만 저장할 배열
+      users_list.each do |articleuser|
+      users << articleuser.user_id
+      end
+      # 알림 내역 저장을 참여한 모든 사람을 대상으로 진행해야함
+      users.each do |user|
+        @new_notification = NewNotification.create! user: User.find(user),
+                            content: "#{params[:id]}번 글에 #{current_user.email}님이 참가했습니다",
+                            link: "/article/show/#{params[:id]}"
+      end
+      
+      ArticleUser.create({ article_id: params[:article_id], user_id: params[:user_id] })
+      flash[:success] = "참여가 완료되었습니다"
+      @new_notification = NewNotification.create! user: current_user,
+                            content: "#{params[:id]}번 글에 참가했습니다",
+                            link: "/article/show/#{params[:id]}"
+                            
+      # 만약 채팅방에 개설되어 있다면 자동 참여되도록 만들어야함
+      if @article.chatroom.present?
+        chatroom = @article.chatroom
+        chatroom.users << current_user
+      end
+      redirect_to "/article/show/#{params[:id]}"
+    else
+      flash[:error] = "참여할 수 없는 게시물입니다"
+      redirect_back(fallback_location: root_path)
     end
-    # 알림 내역 저장을 참여한 모든 사람을 대상으로 진행해야함
-    users.each do |user|
-      @new_notification = NewNotification.create! user: User.find(user),
-                          content: "#{params[:id]}번 글에 #{current_user.email}님이 참가했습니다",
-                          link: "/article/show/#{params[:id]}"
-    end
-    
-    ArticleUser.create({ article_id: params[:article_id], user_id: params[:user_id] })
-    flash[:success] = "참여가 완료되었습니다"
-    @new_notification = NewNotification.create! user: current_user,
-                          content: "#{params[:id]}번 글에 참가했습니다",
-                          link: "/article/show/#{params[:id]}"
-                          
-    # 만약 채팅방에 개설되어 있다면 자동 참여되도록 만들어야함
-    if @article.chatroom.present?
-      chatroom = @article.chatroom
-      chatroom.users << current_user
-    end
-    
-    redirect_to "/article/show/#{params[:id]}"
   end
   
   # user들이 게시물 참여 취소할 수 있도록 하는 메소드
@@ -184,6 +189,22 @@ class ArticleController < ApplicationController
       chatroom.users = chatroom.users - [current_user]
     end
     redirect_to "/article/show/#{params[:id]}"
+  end
+  
+  # 참가자 강제 퇴장 및 저장 기능
+  def out
+    user = User.find(params[:user_id])
+    if @article.user != user #만약 작성자라면 강퇴 불가
+      @article.joined_users.delete(user)
+      @article.banned_users << user
+      redirect_back(fallback_location: root_path)
+      @new_notification = NewNotification.create! user: user,
+                    content: "#{@article.id}번 글에서 강제 취소되었습니다.",
+                    link: "/article/show/#{@article.id}"
+    else
+      flash[:error] = "게시물 권한자는 강퇴 불가능합니다"
+      redirect_back(fallback_location: root_path)
+    end
   end
   
   # 검색엔진 컨트롤러

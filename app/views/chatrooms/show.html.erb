@@ -7,6 +7,15 @@
 <hr>
 <h5><%= @chatroom.article.title %>의 채팅방입니다</h5>
 
+<div class="joined_list">
+<h3>현재 참여자</h3>
+  <ul>
+  <% @chatroom.users.each do |user| %>  
+    <li><%= user.email %></li>
+  <% end %>
+  </ul>
+</div>
+
 <hr>
 <div id="chat_area">
   <ul id="messages">
@@ -22,6 +31,14 @@
 <form id="msg_ipt">
   <input type="text" data-behavior="chatroom_speaker" placeholder="입력은 Enter">
 </form>
+
 <script>
-$("#chat_area").scrollTop($("#chat_area")[0].scrollHeight);
+  $( document ).ready(function(){
+    if (self.name != 'reload') {
+      self.name = 'reload';
+      self.location.reload(true);
+    }
+    else self.name = ''; 
+    $("#chat_area").scrollTop($("#chat_area")[0].scrollHeight);
+  });
 </script>
