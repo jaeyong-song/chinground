@@ -51,13 +51,13 @@
 
 기초 커뮤니티 서비스를 통한 다른 사람들과의 새로운 만남과 커뮤니티 활동 지원
 
-![main](.\info_pic\main.png)
+![main](./info_pic/main.png)
 
 ### 1.2. UI/UX 편의 소개
 
-![user-main](.\info_pic\user-main.png)
+![user-main](./info_pic/user-main.png)
 
-![login](.\info_pic\login.png)
+![login](./info_pic/login.png)
 
 ## 2. 서비스 이용 예시 
 
@@ -65,21 +65,21 @@
 
 모임기능에는 장소 및 일시 등을 넣을 수 있어 커뮤니티 활동 지원
 
-![article-index](.\info_pic\article-index.png)
+![article-index](./info_pic/article-index.png)
 
-![article](.\info_pic\article.png)
+![article](./info_pic/article.png)
 
 ### 2.2. 채팅기능
 
 rails 5.2부터 탑재된 ActionCable을 활용하여 자유 채팅 및 게시물 채팅 지원
 
-![chat_noti](.\info_pic\chat_noti.png)
+![chat_noti](./info_pic/chat_noti.png)
 
 ### 2.3. 별점기능
 
 커뮤니티 활동 시 사용자간 충돌 및 위험성을 방지하기 위해 별점기능 탑재
 
-![rating](.\info_pic\rating.png)
+![rating](./info_pic/rating.png)
 
 ### 2.4. 프로필관리기능(유저 메뉴바 등)
 
@@ -89,11 +89,11 @@ rails 5.2부터 탑재된 ActionCable을 활용하여 자유 채팅 및 게시�
 
 프로필 기능을 통해 친구와 팔로우/워 관계 맺을 수 있으며 이에 따른 알림기능 존재
 
-![user-main](.\info_pic\user-main.png)
+![user-main](./info_pic/user-main.png)
 
-![mypage](.\info_pic\mypage.png)
+![mypage](./info_pic/mypage.png)
 
-![my-profile](.\info_pic\my-profile.png)
+![my-profile](./info_pic/my-profile.png)
 
 ### 2.5. 알림기능 및 검색기능
 
@@ -103,11 +103,11 @@ rails 5.2부터 탑재된 ActionCable을 활용하여 자유 채팅 및 게시�
 
 검색기능으로 게시물, 친구 등 찾기 가능
 
-![chat_noti](.\info_pic\chat_noti.png)
+![chat_noti](./info_pic/chat_noti.png)
 
-![find-article](.\info_pic\find-article.png)
+![find-article](./info_pic/find-article.png)
 
-![find-friend](.\info_pic\find-friend.png)
+![find-friend](./info_pic/find-friend.png)
 
 
 
